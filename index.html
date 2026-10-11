@@ -134,6 +134,19 @@ nav .t.on::after{content:"";position:absolute;left:28%;right:28%;top:-5px;height
 .st.r{background:color-mix(in srgb,var(--rose) 14%,var(--card));color:var(--rose)}.st.g{background:color-mix(in srgb,var(--jade) 15%,var(--card));color:var(--jade)}
 .vb{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;color:#fff;font-weight:800;flex:none}
 .sb[data-va=show]{color:var(--c-home)}.sb[data-va=copy]{color:var(--jade)}.sb[data-va=edit]{color:var(--c-rec)}.sb[data-va=lock]{color:var(--rose)}.sb[data-va=gen]{color:var(--c-inv)}.sb[data-va=vtog]{color:var(--c-home)}
+/* activities */
+.p-daily{--pc:var(--c-home);--bp:#2f6bf0}.p-weekly{--pc:var(--c-rev);--bp:#0b8f90}.p-monthly{--pc:var(--c-rec);--bp:#7c4dd6}.p-yearly{--pc:var(--c-inv);--bp:#c25a00}
+#r-act{--ac:var(--pc)}
+#rseg button[data-rt=fin]{color:var(--c-rec)}#rseg button[data-rt=act]{color:var(--c-rev)}
+#rseg button.on[data-rt=fin]{background:#7c4dd6;color:#fff}#rseg button.on[data-rt=act]{background:#0b8f90;color:#fff}
+#pseg button[data-pp=daily]{color:var(--c-home)}#pseg button[data-pp=weekly]{color:var(--c-rev)}#pseg button[data-pp=monthly]{color:var(--c-rec)}#pseg button[data-pp=yearly]{color:var(--c-inv)}
+#pseg button.on[data-pp=daily]{background:#2f6bf0;color:#fff}#pseg button.on[data-pp=weekly]{background:#0b8f90;color:#fff}#pseg button.on[data-pp=monthly]{background:#7c4dd6;color:#fff}#pseg button.on[data-pp=yearly]{background:#c25a00;color:#fff}
+#r-act .btn:not(.ghost){background:var(--bp);color:#fff}#r-act>.card:first-of-type{border-top:4px solid var(--pc)}
+.fill.pc{background:var(--bp)}
+.plan{display:grid;grid-template-columns:38px 1fr;gap:12px;align-items:start;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--pc);border-radius:16px;padding:12px 14px;margin-top:10px}
+.chk{width:36px;height:36px;border-radius:50%;border:2px solid var(--pc);color:transparent;font-size:18px;font-weight:800;background:transparent}.chk.on{background:var(--bp);border-color:var(--bp);color:#fff}
+.pt{display:block;width:100%;text-align:left;font-weight:700;overflow-wrap:anywhere}.plan.done .pt{text-decoration:line-through;opacity:.65}
+.stars{display:flex;gap:2px;margin-top:6px}.star{font-size:24px;line-height:1;color:var(--line);padding:2px 3px}.star.on{color:#f2a516}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -150,10 +163,21 @@ nav .t.on::after{content:"";position:absolute;left:28%;right:28%;top:-5px;height
 </section>
 
 <section class="view" id="v-rec">
+  <div class="seg" id="rseg" style="margin-top:12px"><button data-rt="fin" class="on">Financial</button><button data-rt="act">Activities</button></div>
+  <div id="r-fin">
   <div class="mn"><button id="k-prev" aria-label="Previous month">‹</button><b id="k-name"></b><button id="k-next" aria-label="Next month">›</button></div>
   <div class="stats" id="k-k"></div>
   <div class="seg" id="flt"><button data-f="all" class="on">All</button><button data-f="income">Income</button><button data-f="expense">Spending</button></div>
-  <div class="card list" id="k-list"></div>
+  <div class="card list" id="k-list"></div></div>
+  <div id="r-act" class="p-daily" style="display:none">
+    <div class="seg" id="pseg" style="margin-top:12px"><button data-pp="daily" class="on">Daily</button><button data-pp="weekly">Weekly</button><button data-pp="monthly">Monthly</button><button data-pp="yearly">Yearly</button></div>
+    <div class="mn"><button id="p-prev" aria-label="Previous">‹</button><b id="p-name"></b><button id="p-next" aria-label="Next">›</button></div>
+    <div class="card" id="p-sum"></div>
+    <div class="card" id="p-form"><h2 id="p-form-t">Add a daily plan</h2><input id="p-in" aria-label="Plan"><input id="p-note" placeholder="Note (optional)" style="margin-top:8px" aria-label="Note">
+      <button class="btn" id="p-add">Add plan</button><button class="btn ghost" id="p-cancel" style="display:none">Cancel</button><button class="btn ghost del" id="p-del" style="display:none">Delete plan</button></div>
+    <div id="p-list"></div>
+    <div class="card" id="p-rev"></div>
+  </div>
 </section>
 
 <section class="view" id="v-inv">
@@ -196,6 +220,7 @@ nav .t.on::after{content:"";position:absolute;left:28%;right:28%;top:-5px;height
   <div class="card"><h2>Accounts</h2><div id="s-acc"></div>
     <div class="row" style="grid-template-columns:1fr 90px;margin-top:12px"><input id="a-new" placeholder="New account, e.g. eSewa"><button class="btn ghost" id="a-add" style="margin:0">Add</button></div></div>
   <div class="card"><h2>Monthly spending budget</h2><input id="bm" type="number" inputmode="decimal" min="0" placeholder="0"></div>
+  <div class="card"><h2>Week planning</h2><label style="margin-top:0">Week starts on</label><select id="wk"><option value="0">Sunday</option><option value="1">Monday</option></select></div>
   <div class="card"><h2>Categories</h2>
     <select id="cm-type"><option value="exp">Spending categories, with monthly budget</option><option value="inc">Income categories</option></select>
     <div id="cm-list"></div>
@@ -235,26 +260,26 @@ nav .t.on::after{content:"";position:absolute;left:28%;right:28%;top:-5px;height
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const KINDS=['Stocks','Mutual fund','Gold','Crypto','Fixed deposit','Real estate','Business','Other'];
 const ICO={Food:'🍽️',Rent:'🏠',Transport:'🚌',Bills:'🧾',Shopping:'🛍️',Health:'💊',Education:'🎓',Entertainment:'🎬',Salary:'💼',Business:'🏪',Gift:'🎁',Stocks:'📈','Mutual fund':'📊',Gold:'🪙',Crypto:'₿','Fixed deposit':'🏦','Real estate':'🏘️'};
-const D={cur:'Rs',tx:[],inv:[],acc:[{id:'a1',name:'Cash',open:0},{id:'a2',name:'Bank',open:0},{id:'a3',name:'Wallet',open:0}],notes:[],cats:{exp:['Food','Rent','Transport','Bills','Shopping','Health','Education','Entertainment','Other'],inc:['Salary','Business','Gift','Other']},bud:{month:0,cat:{}},seen:''};
+const D={cur:'Rs',tx:[],inv:[],acc:[{id:'a1',name:'Cash',open:0},{id:'a2',name:'Bank',open:0},{id:'a3',name:'Wallet',open:0}],notes:[],plans:[],wk:0,cats:{exp:['Food','Rent','Transport','Bills','Shopping','Health','Education','Entertainment','Other'],inc:['Salary','Business','Gift','Other']},bud:{month:0,cat:{}},seen:''};
 let S=D;try{const r=localStorage.getItem('mm_v1');if(r)S={...D,...JSON.parse(r)}}catch(e){}
-const fix=()=>{S.cats={...D.cats,...S.cats};S.bud={month:0,cat:{},...S.bud};S.bud.cat=S.bud.cat||{};['tx','inv','notes'].forEach(k=>S[k]=S[k]||[]);if(!S.acc||!S.acc.length)S.acc=D.acc};fix();
+const fix=()=>{S.cats={...D.cats,...S.cats};S.bud={month:0,cat:{},...S.bud};S.bud.cat=S.bud.cat||{};['tx','inv','notes','plans'].forEach(k=>S[k]=S[k]||[]);if(!S.acc||!S.acc.length)S.acc=D.acc;S.wk=+S.wk||0};fix();
 let cdb=null,ct=null,busy=false,again=false,dirty=false,syncS='wait',unlocked=false;const known=new Set(),last={};
 const SYN={wait:'Connecting...',ok:'Synced to your account',off:'Not signed in. Saved on this device only.',err:'Sync paused. Will retry.'};
-const dk=k=>'tx'+k.replace('-',''),nk=k=>'nt'+k.replace('-','');
+const dk=k=>'tx'+k.replace('-',''),nk=k=>'nt'+k.replace('-',''),pk=k=>'pl'+k.replace('-','');
 function setSync(s){if(s===syncS)return;syncS=s;const e=$('#sync-st');if(e)e.textContent=SYN[s];const t=$('#today');if(t&&window.render)render()}
 const save=()=>{try{localStorage.setItem('mm_v1',JSON.stringify(S))}catch(e){}if(cdb){clearTimeout(ct);ct=setTimeout(push,700)}else dirty=true};
 async function push(){if(!cdb)return;if(busy){again=true;return}busy=true;
-  try{const by={},nb={};S.tx.forEach(t=>{const k=t.date.slice(0,7);(by[k]=by[k]||[]).push(t);known.add(k)});S.notes.forEach(t=>{const k=t.date.slice(0,7);(nb[k]=nb[k]||[]).push(t);known.add(k)});
-    const docs={meta:JSON.stringify({...S,tx:[],notes:[],months:[...known]})};known.forEach(k=>{docs[dk(k)]=JSON.stringify(by[k]||[]);docs[nk(k)]=JSON.stringify(nb[k]||[])});
+  try{const by={},nb={};S.tx.forEach(t=>{const k=t.date.slice(0,7);(by[k]=by[k]||[]).push(t);known.add(k)});S.notes.forEach(t=>{const k=t.date.slice(0,7);(nb[k]=nb[k]||[]).push(t);known.add(k)});const pb={};S.plans.forEach(t=>{const k=t.date.slice(0,7);(pb[k]=pb[k]||[]).push(t);known.add(k)});
+    const docs={meta:JSON.stringify({...S,tx:[],notes:[],plans:[],months:[...known]})};known.forEach(k=>{docs[dk(k)]=JSON.stringify(by[k]||[]);docs[nk(k)]=JSON.stringify(nb[k]||[]);docs[pk(k)]=JSON.stringify(pb[k]||[])});
     for(const k in docs){if(last[k]!==docs[k]){await cdb.doc(k).set({d:docs[k]});last[k]=docs[k]}}setSync('ok')}
   catch(e){setSync('err');clearTimeout(ct);ct=setTimeout(push,15000)}
   busy=false;if(again){again=false;push()}}
 async function cloudInit(){try{const db=await claude.use('db'),us=await claude.use('user');if(!db||!us){setSync('off');return}
   const id=await us.id(),c=db.collection('data/users/'+id),m=await c.doc('meta').get(),first=localStorage.getItem('mm_sync')!==id;
-  if(m.exists){const meta=JSON.parse(m.data().d),ms=meta.months||[],parts=await Promise.all(ms.map(k=>c.doc(dk(k)).get())),np=await Promise.all(ms.map(k=>c.doc(nk(k)).get())),tx=[],notes=[];
-    parts.forEach(p=>{if(p.exists)tx.push(...JSON.parse(p.data().d))});np.forEach(p=>{if(p.exists)notes.push(...JSON.parse(p.data().d))});const cl={...meta,tx,notes};delete cl.months;cl.inv=cl.inv||[];
-    if(first||dirty){const ti=new Set(tx.map(x=>x.id)),ii=new Set(cl.inv.map(x=>x.id));S.tx.forEach(x=>{if(!ti.has(x.id))cl.tx.push(x)});S.inv.forEach(x=>{if(!ii.has(x.id))cl.inv.push(x)});const ni=new Set(notes.map(x=>x.id));S.notes.forEach(x=>{if(!ni.has(x.id))cl.notes.push(x)})}
-    S={...D,...cl};fix();lockVault();last.meta=m.data().d;ms.forEach((k,i)=>{known.add(k);if(parts[i].exists)last[dk(k)]=parts[i].data().d;if(np[i].exists)last[nk(k)]=np[i].data().d})}
+  if(m.exists){const meta=JSON.parse(m.data().d),ms=meta.months||[],parts=await Promise.all(ms.map(k=>c.doc(dk(k)).get())),np=await Promise.all(ms.map(k=>c.doc(nk(k)).get())),pq=await Promise.all(ms.map(k=>c.doc(pk(k)).get())),tx=[],notes=[],plans=[];
+    parts.forEach(p=>{if(p.exists)tx.push(...JSON.parse(p.data().d))});np.forEach(p=>{if(p.exists)notes.push(...JSON.parse(p.data().d))});pq.forEach(p=>{if(p.exists)plans.push(...JSON.parse(p.data().d))});const cl={...meta,tx,notes,plans};delete cl.months;cl.inv=cl.inv||[];
+    if(first||dirty){const ti=new Set(tx.map(x=>x.id)),ii=new Set(cl.inv.map(x=>x.id));S.tx.forEach(x=>{if(!ti.has(x.id))cl.tx.push(x)});S.inv.forEach(x=>{if(!ii.has(x.id))cl.inv.push(x)});const ni=new Set(notes.map(x=>x.id));S.notes.forEach(x=>{if(!ni.has(x.id))cl.notes.push(x)});cl.plans=cl.plans||[];const pi=new Set(plans.map(x=>x.id));S.plans.forEach(x=>{if(!pi.has(x.id))cl.plans.push(x)})}
+    S={...D,...cl};fix();lockVault();last.meta=m.data().d;ms.forEach((k,i)=>{known.add(k);if(parts[i].exists)last[dk(k)]=parts[i].data().d;if(np[i].exists)last[nk(k)]=np[i].data().d;if(pq[i].exists)last[pk(k)]=pq[i].data().d})}
   cdb=c;localStorage.setItem('mm_sync',id);try{localStorage.setItem('mm_v1',JSON.stringify(S))}catch(e){}
   $('#cur').value=S.cur;$('#bm').value=S.bud.month||'';render();pinUI();lockCheck();await push()}catch(e){setSync('off')}}
 async function hp(p){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('mm|'+p));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
@@ -276,8 +301,8 @@ const accn=id=>(S.acc.find(a=>a.id===id)||{}).name||'';
 const bal=a=>a.open+sum(S.tx.filter(t=>t.acc===a.id),t=>t.type==='income'?t.amt:-t.amt);
 const stat=(l,v,c)=>`<div class="stat ${c?'s-'+c:''}"><span>${l}</span><b class="${c||''}">${v}</b></div>`;
 const prog=(l,u,m)=>`<div class="pg"><div class="ph"><span>${esc(l)}</span><span>${fmt(u)} of ${fmt(m)}</span></div><div class="track"><div class="fill ${u>m?'e':''}" style="width:${Math.min(100,u/m*100)}%"></div></div><small>${u>m?'Over by '+fmt(u-m):fmt(m-u)+' left'}</small></div>`;
-function vbars(lb,sets){const W=320,H=150,B=20,T=14,n=lb.length,gw=W/n,bw=gw*.7/sets.length;let real=0;sets.forEach(s=>s.v.forEach(x=>{if(x>real)real=x}));const mx=real||1;
-  let o=`<svg viewBox="0 0 ${W} ${H}" width="100%"><text x="0" y="10" font-size="10" style="fill:var(--mut)">${real?'max '+fmt(real):'no data yet'}</text>`;
+function vbars(lb,sets,ff=fmt){const W=320,H=150,B=20,T=14,n=lb.length,gw=W/n,bw=gw*.7/sets.length;let real=0;sets.forEach(s=>s.v.forEach(x=>{if(x>real)real=x}));const mx=real||1;
+  let o=`<svg viewBox="0 0 ${W} ${H}" width="100%"><text x="0" y="10" font-size="10" style="fill:var(--mut)">${real?'max '+ff(real):'no data yet'}</text>`;
   lb.forEach((l,i)=>{sets.forEach((s,j)=>{const h=s.v[i]/mx*(H-B-T);o+=`<rect x="${i*gw+gw*.15+j*bw}" y="${H-B-h}" width="${bw}" height="${h}" rx="3" style="fill:${s.c}"/>`});o+=`<text x="${i*gw+gw/2}" y="${H-5}" font-size="10" text-anchor="middle" style="fill:var(--mut)">${l}</text>`});return o+'</svg>'}
 const PAL=['#f2a516','#16906c','#d9455c','#3b6fd4','#8e5bd1','#16a2b8','#e67e22','#7f8c8d'];
 function donut(rows){const t=sum(rows,r=>r[1]);if(!t)return'<div class="empty">Nothing recorded yet.</div>';let acc=0,o='<svg viewBox="0 0 120 120" width="132" height="132"><g transform="rotate(-90 60 60)">';
@@ -327,7 +352,7 @@ function render(){
   const ik=stat('Invested',fmt(po.a),'iv')+stat('Value now',fmt(po.v))+stat('Gain or loss',(po.g>=0?'+':'-')+fmt(Math.abs(po.g)),po.g>=0?'inc':'exp');$('#i-k').innerHTML=ik;
   $('#i-dn').innerHTML=donut(grp(S.inv,'kind',i=>i.val));$('#i-list').innerHTML=S.inv.length?sorted(S.inv).map(invRow).join(''):'<div class="empty">No investments yet.</div>';
   // review
-  renderNotes();
+  renderNotes();renderAct();
   const f=feedback(rm),rc=f.c;$('#r-name').textContent=mname(rm);$('#r-next').disabled=rm>=CUR;
   const col=f.score<40?'var(--rose)':'var(--jade)',L2=2*Math.PI*42;
   $('#r-rings').innerHTML=f.none?'<div class="empty">No data for this month.</div>':`<div><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="rgba(128,138,160,.25)" stroke-width="9"/><circle cx="50" cy="50" r="42" fill="none" stroke="${col}" stroke-width="9" stroke-linecap="round" stroke-dasharray="${f.score/100*L2} ${L2}" transform="rotate(-90 50 50)"/><text x="50" y="58" text-anchor="middle" font-size="26" font-weight="800" style="fill:var(--text)">${f.score}</text></svg><small>Money score out of 100</small></div>`;
@@ -401,11 +426,49 @@ function renderNotes(){$('#n-moods').innerHTML=MOODS.map(m=>`<button class="mood
   const tn=sorted(S.notes.filter(n=>n.date===TODAY));$('#h-note').innerHTML=tn.length?noteBtn(tn[0]):'<div class="empty">You have not written today\'s note yet.</div>'}
 function noteEdit(n){ne=n?n.id:null;nm=n?moodOf(n):'';ndel=false;$('#n-txt').value=n?n.txt:'';$('#n-date').value=n?n.date:TODAY;$('#n-title').textContent=n?'Edit note':'Write notes';
   $('#n-save').textContent=n?'Save changes':'Save note';$('#n-cancel').style.display=$('#n-del').style.display=n?'':'none';$('#n-del').textContent='Delete note';renderNotes()}
+const PR={daily:0,weekly:1,monthly:2,yearly:3},PN={daily:'day',weekly:'week',monthly:'month',yearly:'year'},PC={daily:'#2f6bf0',weekly:'#0b8f90',monthly:'#7c4dd6',yearly:'#c25a00'},PL={daily:'Daily',weekly:'Weekly',monthly:'Monthly',yearly:'Yearly'},PEX={daily:'Walk 30 minutes',weekly:'Finish two chapters',monthly:'Save a fixed amount',yearly:'Learn a new skill'};
+let plP='daily',plD=TODAY,plE=null,plDel=false;
+const ymd=d=>d.split('-').map(Number),addD=(d,n)=>{const[y,m,x]=ymd(d);return iso(new Date(y,m-1,x+n))};
+const wkS=d=>{const[y,m,x]=ymd(d);return addD(d,-((new Date(y,m-1,x).getDay()-S.wk+7)%7))};
+const plStart=(p,d)=>p==='daily'?d:p==='weekly'?wkS(d):p==='monthly'?d.slice(0,7)+'-01':d.slice(0,4)+'-01-01';
+const plRange=(p,d)=>{const s=plStart(p,d);return[s,p==='daily'?s:p==='weekly'?addD(s,6):p==='monthly'?iso(new Date(+s.slice(0,4),+s.slice(5,7),0)):s.slice(0,4)+'-12-31']};
+const plMove=(p,d,n)=>{const s=plStart(p,d);return p==='daily'?addD(s,n):p==='weekly'?addD(s,7*n):p==='monthly'?shift(s.slice(0,7),n)+'-01':(+s.slice(0,4)+n)+'-01-01'};
+const plLabel=(p,d)=>{const[s,e]=plRange(p,d),f=x=>new Date(x+'T00:00').toLocaleDateString(undefined,{day:'numeric',month:'short'});return p==='daily'?dl(s):p==='weekly'?f(s)+' to '+f(e):p==='monthly'?mname(s.slice(0,7)):s.slice(0,4)};
+const plView=()=>{const[s,e]=plRange(plP,plD);return S.plans.filter(x=>x.period===plP&&x.date>=s&&x.date<=e).sort((a,b)=>a.ts-b.ts)};
+const plSet=(p,d)=>{const[s,e]=plRange(p,d);return S.plans.filter(x=>PR[x.period]<=PR[p]&&x.date>=s&&x.date<=e)};
+const plPct=L=>L.length?L.filter(x=>x.done).length/L.length*100:0;
+const plAvg=L=>{const r=L.filter(x=>x.rating>0);return r.length?sum(r,x=>x.rating)/r.length:0};
+function plEdit(x){plE=x?x.id:null;plDel=false;$('#p-in').value=x?x.title:'';$('#p-note').value=x?x.note||'':'';$('#p-add').textContent=x?'Save changes':'Add plan';$('#p-cancel').style.display=$('#p-del').style.display=x?'':'none';$('#p-del').textContent='Delete plan';$('#p-form-t').textContent=x?'Edit plan':'Add a '+plP+' plan'}
+function renderAct(){const box=$('#r-act');if(!box)return;box.className='p-'+plP;$('#wk').value=String(S.wk||0);
+  $$('#pseg button').forEach(b=>b.classList.toggle('on',b.dataset.pp===plP));$('#p-name').textContent=plLabel(plP,plD);
+  $('#p-in').placeholder='e.g. '+PEX[plP];if(!plE)$('#p-form-t').textContent='Add a '+plP+' plan';
+  const L=plView(),dn=L.filter(x=>x.done).length,av=plAvg(L);
+  $('#p-sum').innerHTML=L.length?`<div class="ph"><span>${dn} of ${L.length} done</span><span>${Math.round(dn/L.length*100)}%</span></div><div class="track"><div class="fill pc" style="width:${dn/L.length*100}%"></div></div><small>${av?'Average rating '+pc(av)+' out of 5':'Tap the stars to rate each activity'}</small>`:`<div class="empty" style="padding:0">No ${plP} plans for this ${PN[plP]} yet. Add your first plan below.</div>`;
+  $('#p-list').innerHTML=L.map(x=>`<div class="plan ${x.done?'done':''}"><button class="chk ${x.done?'on':''}" data-ac="${x.id}" aria-label="Mark done">✓</button><div><button class="pt" data-ae="${x.id}">${esc(x.title)}</button>${x.note?`<small style="display:block">${esc(x.note)}</small>`:''}<div class="stars">${[1,2,3,4,5].map(n=>`<button class="star ${n<=x.rating?'on':''}" data-as="${x.id}|${n}" aria-label="Rate ${n} of 5">★</button>`).join('')}</div></div></div>`).join('');
+  plReview()}
+function plReview(){const L=plSet(plP,plD),tot=L.length,box=$('#p-rev');
+  if(!tot){box.innerHTML=`<h2>${PL[plP]} review</h2><div class="empty">Add plans to see your ${PN[plP]} review here.</div>`;return}
+  const dn=L.filter(x=>x.done),p=plPct(L),av=plAvg(L),rt=L.filter(x=>x.rating>0).length,pL=plSet(plP,plMove(plP,plD,-1)),it=[];
+  it.push(p>=80?{t:'good',s:`Great ${PN[plP]}! You completed ${Math.round(p)}% of your plans.`}:p>=50?{t:'tip',s:`Good progress: ${Math.round(p)}% done, ${tot-dn.length} still open.`}:{t:'warn',s:`Only ${Math.round(p)}% done. Try fewer, smaller plans, or move the rest forward.`});
+  if(rt)it.push(av>=4?{t:'good',s:`You rated your activities highly, ${pc(av)} out of 5 on average.`}:av>=3?{t:'tip',s:`Your average rating is ${pc(av)} out of 5. Look for ways to make activities more satisfying.`}:{t:'warn',s:`Your average rating is low, ${pc(av)} out of 5. Think about what made these activities hard or unpleasant.`});
+  if(dn.length>rt)it.push({t:'tip',s:`${dn.length-rt} finished ${dn.length-rt===1?'activity has':'activities have'} no rating yet. Tap the stars to rate them.`});
+  if(pL.length){const dd=Math.round(p-plPct(pL));if(Math.abs(dd)>=5)it.push(dd>0?{t:'good',s:`Up ${dd} points from last ${PN[plP]}.`}:{t:'warn',s:`Down ${-dd} points from last ${PN[plP]}.`})}
+  let chart='';
+  if(plP!=='daily'){const[s,e]=plRange(plP,plD),dp=L.filter(x=>x.period==='daily'&&x.done),lb=[],v=[];
+    if(plP==='yearly')for(let m=1;m<=12;m++){const k=s.slice(0,4)+'-'+String(m).padStart(2,'0');lb.push(new Date(k+'-01T00:00').toLocaleDateString(undefined,{month:'short'}).slice(0,1));v.push(dp.filter(x=>x.date.slice(0,7)===k).length)}
+    else for(let i=0;i<(plP==='weekly'?7:+e.slice(8));i++){const d=addD(s,i);lb.push(plP==='weekly'?new Date(d+'T00:00').toLocaleDateString(undefined,{weekday:'narrow'}):(i===0||(i+1)%5===0?String(i+1):''));v.push(dp.filter(x=>x.date===d).length)}
+    const mx=Math.max(...v);if(mx>0){const bi=v.indexOf(mx);it.push({t:'tip',s:plP==='yearly'?`Most active month: ${new Date(s.slice(0,4)+'-'+String(bi+1).padStart(2,'0')+'-01T00:00').toLocaleDateString(undefined,{month:'long'})}, ${mx} daily plans done.`:`Most active day: ${dl(addD(s,bi))}, ${mx} done.`})}
+    chart=`<div class="sub" style="margin:14px 0 2px">Daily plans done per ${plP==='yearly'?'month':'day'}</div>`+vbars(lb,[{c:'var(--bp)',v}],x=>String(x))}
+  const bk=['daily','weekly','monthly','yearly'].filter(k=>PR[k]<=PR[plP]).map(k=>{const a=L.filter(x=>x.period===k);if(!a.length)return'';const d2=a.filter(x=>x.done).length;return`<div class="pg"><div class="ph"><span>${PL[k]} plans</span><span>${d2} of ${a.length} done</span></div><div class="track"><div class="fill" style="width:${d2/a.length*100}%;background:${PC[k]}"></div></div></div>`}).join('');
+  const top=dn.filter(x=>x.rating>=4).sort((a,b)=>b.rating-a.rating).slice(0,3),open=L.filter(x=>!x.done).slice(0,5),un=plView().filter(x=>!x.done);
+  box.innerHTML=`<h2>${PL[plP]} review</h2><div class="sub" style="margin:-4px 0 8px">Counts ${plP==='daily'?'daily plans':'daily plans and '+PL[plP].toLowerCase()+' or smaller plans'} in this ${PN[plP]}.</div>${it.map(x=>`<div class="fi ${x.t}">${esc(x.s)}</div>`).join('')}${bk}${chart}`+
+    (top.length?`<div class="sub" style="margin-top:12px">Top rated: ${top.map(x=>esc(x.title)+' ('+x.rating+')').join(', ')}</div>`:'')+(open.length?`<div class="sub" style="margin-top:6px">Still open: ${open.map(x=>esc(x.title)).join(', ')}</div>`:'')+
+    (un.length?`<button class="btn ghost" data-carry="1">Move ${un.length} unfinished to next ${PN[plP]}</button>`:'')}
 function renderSet(){const t=$('#cm-type').value;
   $('#s-acc').innerHTML=S.acc.map((a,i)=>`<div class="ai"><span class="ei">${/bank/i.test(a.name)?'🏦':/cash/i.test(a.name)?'💵':'👛'}</span><b>${esc(a.name)}</b><input type="number" inputmode="decimal" data-ao="${i}" value="${a.open||''}" placeholder="Opening" aria-label="Opening balance"><button class="x" data-ax="${i}" aria-label="Remove">×</button></div>`).join('');
   $('#cm-list').innerHTML=S.cats[t].map((c,i)=>`<div class="ai" style="grid-template-columns:42px 1fr ${t==='exp'?'110px ':''}32px"><span class="ei">${ICO[c]||'🔖'}</span><b>${esc(c)}</b>${t==='exp'?`<input type="number" inputmode="decimal" min="0" placeholder="Budget" data-bi="${i}" value="${S.bud.cat[c]||''}">`:''}<button class="x" data-ci="${i}" aria-label="Remove">×</button></div>`).join('')}
 const pos={};let cv='home';
-function go(v){pos[cv]=window.scrollY;if(v!=='notes'&&vkey)lockVault();cv=v;document.body.dataset.tab=v;$('#fab').style.display=v==='notes'||v==='set'?'none':'';$$('nav .t').forEach(x=>x.classList.toggle('on',x.dataset.v===v));$$('.view').forEach(x=>x.classList.toggle('on',x.id==='v-'+v));
+function go(v){pos[cv]=window.scrollY;if(v!=='notes'&&vkey)lockVault();cv=v;document.body.dataset.tab=v;$('#fab').style.display=v==='notes'||v==='set'||(v==='rec'&&$('#r-act').style.display!=='none')?'none':'';$$('nav .t').forEach(x=>x.classList.toggle('on',x.dataset.v===v));$$('.view').forEach(x=>x.classList.toggle('on',x.id==='v-'+v));
   if(v==='set')renderSet();if(v==='rev'&&rm===shift(CUR,-1)&&S.seen!==rm){S.seen=rm;save();const b=$('#h-ban');if(b)b.innerHTML=''}
   window.scrollTo(0,v==='home'||v==='rev'?0:(pos[v]||0))}
 function setF(t){ft=t;$('#sh').dataset.k=t;$$('#fseg button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));const inv=t==='invest';
@@ -433,6 +496,12 @@ $('#n-q').oninput=renderNotes;$('#n-cancel').onclick=()=>noteEdit(null);
 $('#n-save').onclick=()=>{const t=$('#n-txt').value.trim();if(!t){$('#n-txt').focus();return}const d=$('#n-date').value||TODAY;
   if(ne){const n=S.notes.find(x=>x.id===ne);if(n)Object.assign(n,{txt:t,date:d,mood:nm})}else S.notes.push({id:uid(),date:d,mood:nm,txt:t,ts:Date.now()});save();noteEdit(null);render()};
 $('#n-del').onclick=function(){if(!ndel){ndel=true;this.textContent='Tap again to delete';return}S.notes=S.notes.filter(x=>x.id!==ne);save();noteEdit(null);render()};
+$('#p-prev').onclick=()=>{plD=plMove(plP,plD,-1);plEdit(null);renderAct()};$('#p-next').onclick=()=>{plD=plMove(plP,plD,1);plEdit(null);renderAct()};
+$('#p-cancel').onclick=()=>plEdit(null);$('#wk').onchange=function(){S.wk=+this.value;save();render()};
+$('#p-add').onclick=()=>{const t=$('#p-in').value.trim();if(!t){$('#p-in').focus();return}const n=$('#p-note').value.trim();
+  if(plE){const x=S.plans.find(y=>y.id===plE);if(x)Object.assign(x,{title:t,note:n})}else S.plans.push({id:uid(),title:t,note:n,period:plP,date:plStart(plP,plD),done:false,rating:0,ts:Date.now()});
+  save();plEdit(null);render()};
+$('#p-del').onclick=function(){if(!plDel){plDel=true;this.textContent='Tap again to delete';return}S.plans=S.plans.filter(x=>x.id!==plE);save();plEdit(null);render()};
 $('#bm').oninput=function(){S.bud.month=parseFloat(this.value)||0;save();render()};
 $('#cm-type').onchange=renderSet;
 $('#cm-add').onclick=()=>{const t=$('#cm-type').value,n=$('#cm-new').value.trim();if(n&&!S.cats[t].includes(n)){S.cats[t].push(n);$('#cm-new').value='';save();renderSet()}};
@@ -442,6 +511,12 @@ document.addEventListener('click',e=>{const t=e.target.closest('button');if(!t)r
   if(d.e){const[k,id]=d.e.split('|'),rec=S[k].find(x=>x.id===id);if(rec)openSheet(null,{k,rec})}
   if(d.nt){$$('#nseg button').forEach(x=>x.classList.toggle('on',x===t));$('#n-notes').style.display=d.nt==='notes'?'':'none';$('#n-vault').style.display=d.nt==='vault'?'':'none';if(d.nt==='vault')renderVault();else lockVault()}
   if(d.va)vault(d.va,d.vi,t);
+  if(d.rt){$$('#rseg button').forEach(x=>x.classList.toggle('on',x===t));$('#r-fin').style.display=d.rt==='fin'?'':'none';$('#r-act').style.display=d.rt==='act'?'':'none';$('#fab').style.display=d.rt==='act'?'none':'';if(d.rt==='act')renderAct()}
+  if(d.pp){const[s0,e0]=plRange(plP,plD);if(TODAY>=s0&&TODAY<=e0)plD=TODAY;plP=d.pp;plEdit(null);renderAct()}
+  if(d.ac){const x=S.plans.find(y=>y.id===d.ac);if(x){x.done=!x.done;save();render()}}
+  if(d.ae){const x=S.plans.find(y=>y.id===d.ae);if(x){plEdit(x);$('#p-form').scrollIntoView({behavior:'smooth',block:'start'})}}
+  if(d.as){const[i,n]=d.as.split('|'),x=S.plans.find(y=>y.id===i);if(x){x.rating=x.rating===+n?0:+n;save();render()}}
+  if(d.carry){const nd=plStart(plP,plMove(plP,plD,1));plView().filter(x=>!x.done).forEach(x=>x.date=nd);save();render()}
   if(d.rev){rm=d.rev;go('rev')}
   if(d.m!==undefined){nm=nm===d.m?'':d.m;renderNotes()}
   if(d.n){const n=S.notes.find(x=>x.id===d.n);if(n){go('notes');noteEdit(n);window.scrollTo(0,0)}}
