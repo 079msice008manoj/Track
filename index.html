@@ -147,6 +147,50 @@ nav .t.on::after{content:"";position:absolute;left:28%;right:28%;top:-5px;height
 .chk{width:36px;height:36px;border-radius:50%;border:2px solid var(--pc);color:transparent;font-size:18px;font-weight:800;background:transparent}.chk.on{background:var(--bp);border-color:var(--bp);color:#fff}
 .pt{display:block;width:100%;text-align:left;font-weight:700;overflow-wrap:anywhere}.plan.done .pt{text-decoration:line-through;opacity:.65}
 .stars{display:flex;gap:2px;margin-top:6px}.star{font-size:24px;line-height:1;color:var(--line);padding:2px 3px}.star.on{color:#f2a516}
+/* dues: accounts payable / receivable */
+:root{--c-due:#9a6200}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--c-due:#ffc15a}}
+:root[data-theme="dark"]{--c-due:#ffc15a}
+#rseg button[data-rt=due]{color:var(--c-due)}#rseg button.on[data-rt=due]{background:#9a6200;color:#fff}
+.d-payable{--du:var(--rose);--bd:#c93a50}.d-receivable{--du:var(--jade);--bd:#127f5d}
+#r-due{--ac:var(--du)}
+#dseg button[data-dk=payable]{color:var(--rose)}#dseg button[data-dk=receivable]{color:var(--jade)}
+#dseg button.on[data-dk=payable]{background:var(--b-exp);color:#fff}#dseg button.on[data-dk=receivable]{background:var(--b-inc);color:#fff}
+#r-due .btn:not(.ghost){background:var(--bd);color:#fff}#d-head{border-top:4px solid var(--du)}
+.due{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--du);border-radius:16px;padding:14px;margin-top:10px;display:grid;gap:8px}
+.dnm{font-weight:800;font-size:16px;text-align:left;overflow-wrap:anywhere}
+.dmn{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.dmn b{font-size:20px}
+.dpill{font-size:12px;font-weight:800;padding:3px 10px;border-radius:99px;background:var(--bg);color:var(--mut);white-space:nowrap}
+.dpill.ok{background:color-mix(in srgb,var(--jade) 15%,var(--card));color:var(--jade)}.dpill.late{background:color-mix(in srgb,var(--rose) 15%,var(--card));color:var(--rose)}.dpill.warn{background:color-mix(in srgb,var(--c-inv) 16%,var(--card));color:var(--c-inv)}
+.dpay{display:flex;justify-content:space-between;align-items:center}.dpay .x{padding:2px 8px;color:var(--mut);font-size:18px}
+#psh[data-k=payable] .amtin{color:var(--rose)}#psh[data-k=receivable] .amtin{color:var(--jade)}
+#psh[data-k=payable] #psh-save{background:var(--b-exp);color:#fff}#psh[data-k=receivable] #psh-save{background:var(--b-inc);color:#fff}
+.calc{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:6px;align-items:center}.calc>div{background:var(--bg);border-radius:12px;padding:8px 10px;min-width:0}
+.calc small{display:block;font-size:11px}.calc b{display:block;font-size:14px;overflow-wrap:anywhere}.calc i{font-style:normal;color:var(--mut);font-weight:800}
+.dpay .dpl{flex:1;text-align:left;padding:6px 0;color:var(--text)}.dpay .dpl u{color:var(--du);font-weight:700;margin-left:6px;font-size:12px}
+.cf{position:fixed;inset:0;z-index:40;display:none;place-items:center;padding:20px}.cf.on{display:grid}
+.cb{position:relative;width:100%;max-width:340px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;animation:up .18s ease-out}
+.cft{font-size:18px;font-weight:800;margin-bottom:6px}.cfr{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.cfr .btn{margin-top:0;height:46px}
+#cf-yes{background:var(--b-exp);color:#fff}
+/* reminders */
+:root{--c-rem:#c2410c}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--c-rem:#ff9a62}}
+:root[data-theme="dark"]{--c-rem:#ff9a62}
+#n-rem{--ac:var(--c-rem)}
+#nseg button[data-nt=rem]{color:var(--c-rem)}#nseg button.on[data-nt=rem]{background:#c2410c;color:#fff}
+#n-rem .btn:not(.ghost){background:#c2410c;color:#fff}#n-rem>.card:first-child{border-top:4px solid var(--c-rem)}
+.rchips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.rchip{padding:8px 12px;border-radius:99px;border:1px solid color-mix(in srgb,var(--c-rem) 45%,var(--line));color:var(--c-rem);font-weight:700;font-size:13px;background:var(--card)}
+.rem{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--c-rem);border-radius:16px;padding:14px;margin-top:10px;display:grid;gap:8px}
+.rem.m{border-left-color:var(--rose)}.rem.d{border-left-color:var(--jade);opacity:.72}
+.rt{font-weight:800;font-size:16px;text-align:left;overflow-wrap:anywhere}.rtm{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}.rtm b{font-size:22px}
+.rpill{font-size:12px;font-weight:800;padding:3px 10px;border-radius:99px;background:color-mix(in srgb,var(--c-rem) 14%,var(--card));color:var(--c-rem);white-space:nowrap}
+.rpill.m{background:color-mix(in srgb,var(--rose) 14%,var(--card));color:var(--rose)}.rpill.d{background:color-mix(in srgb,var(--jade) 15%,var(--card));color:var(--jade)}
+.rbt{display:flex;gap:8px;flex-wrap:wrap}a.sb{display:inline-flex;align-items:center;text-decoration:none}
+.al{position:fixed;inset:0;z-index:45;display:none;place-items:center;padding:20px;background:rgba(8,12,24,.72)}.al.on{display:grid}
+.alb{width:100%;max-width:340px;background:var(--card);border:2px solid var(--c-rem);border-radius:24px;padding:24px;text-align:center;animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 10px color-mix(in srgb,var(--c-rem) 25%,transparent)}}
+.alb svg{color:var(--c-rem)}.alt{font-size:22px;font-weight:800;margin-top:6px;overflow-wrap:anywhere}.alm{font-size:34px;font-weight:800;letter-spacing:-.02em;margin-top:4px}
+.alr{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.alr .btn{margin-top:0;height:48px}#al-done{background:#c2410c;color:#fff}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -155,6 +199,7 @@ nav .t.on::after{content:"";position:absolute;left:28%;right:28%;top:-5px;height
 <main>
 <section class="view on" id="v-home">
   <div id="h-ban"></div><div class="hero" id="hero"></div>
+  <div class="hd"><h2>Reminders</h2><button data-v="notes" data-nt="rem">See all</button></div><div class="card list" id="h-rem"></div>
   <div class="hd"><h2>Accounts</h2></div><div class="card list" id="h-acc"></div>
   <div class="hd"><h2>Recent</h2><button data-v="rec">See all</button></div><div class="card list" id="h-rec"></div>
   <div class="hd"><h2>Today's note</h2><button data-v="notes">Write</button></div><div class="card" id="h-note"></div>
@@ -163,7 +208,7 @@ nav .t.on::after{content:"";position:absolute;left:28%;right:28%;top:-5px;height
 </section>
 
 <section class="view" id="v-rec">
-  <div class="seg" id="rseg" style="margin-top:12px"><button data-rt="fin" class="on">Financial</button><button data-rt="act">Activities</button></div>
+  <div class="seg" id="rseg" style="margin-top:12px"><button data-rt="fin" class="on">Financial</button><button data-rt="act">Activities</button><button data-rt="due">Dues</button></div>
   <div id="r-fin">
   <div class="mn"><button id="k-prev" aria-label="Previous month">‹</button><b id="k-name"></b><button id="k-next" aria-label="Next month">›</button></div>
   <div class="stats" id="k-k"></div>
@@ -177,6 +222,17 @@ nav .t.on::after{content:"";position:absolute;left:28%;right:28%;top:-5px;height
       <button class="btn" id="p-add">Add plan</button><button class="btn ghost" id="p-cancel" style="display:none">Cancel</button><button class="btn ghost del" id="p-del" style="display:none">Delete plan</button></div>
     <div id="p-list"></div>
     <div class="card" id="p-rev"></div>
+  </div>
+  <div id="r-due" class="d-payable" style="display:none">
+    <div class="seg" id="dseg" style="margin-top:12px"><button data-dk="payable" class="on">Accounts payable</button><button data-dk="receivable">Accounts receivable</button></div>
+    <div class="card" id="d-head"></div>
+    <div class="card" id="d-form"><h2 id="d-ft">Add a payable</h2>
+      <label id="d-pl" style="margin-top:0">Who do you owe?</label><input id="d-who" autocomplete="off" aria-label="Name">
+      <div class="row"><div><label>Total amount</label><input id="d-amt" type="number" inputmode="decimal" min="0" placeholder="0"></div><div id="d-paidw"><label id="d-paidl">Already paid (optional)</label><input id="d-paid" type="number" inputmode="decimal" min="0" placeholder="0"></div></div>
+      <label>Due date (optional)</label><input id="d-due" type="date">
+      <label>Note (optional)</label><input id="d-note" placeholder="e.g. Rent, loan, goods">
+      <button class="btn" id="d-add">Add payable</button><button class="btn ghost" id="d-cancel" style="display:none">Cancel</button><button class="btn ghost del" id="d-del" style="display:none">Delete entry</button></div>
+    <div id="d-list"></div>
   </div>
 </section>
 
@@ -198,7 +254,7 @@ nav .t.on::after{content:"";position:absolute;left:28%;right:28%;top:-5px;height
 </section>
 
 <section class="view" id="v-notes">
-  <div class="seg" style="margin-top:12px" id="nseg"><button data-nt="notes" class="on">Notes</button><button data-nt="vault">Passwords</button></div>
+  <div class="seg" style="margin-top:12px" id="nseg"><button data-nt="notes" class="on">Notes</button><button data-nt="rem">Reminders</button><button data-nt="vault">Passwords</button></div>
   <div id="n-notes">
   <div class="card"><h2 id="n-title">Write notes</h2><div class="sub">Write about your day, your money, or your plans. Tap a mood if you like.</div>
     <div class="moods" id="n-moods"></div>
@@ -207,6 +263,19 @@ nav .t.on::after{content:"";position:absolute;left:28%;right:28%;top:-5px;height
     <button class="btn ghost" id="n-cancel" style="display:none">Cancel editing</button><button class="btn ghost del" id="n-del" style="display:none">Delete note</button></div>
   <input id="n-q" type="search" placeholder="Search your notes" style="margin-top:14px" aria-label="Search notes">
   <div id="n-list"></div></div>
+  <div id="n-rem" style="display:none">
+    <div class="card"><h2 id="r-ft">New reminder</h2>
+      <label style="margin-top:0">What should I remind you about?</label><input id="r-title" placeholder="e.g. Pay electricity bill" autocomplete="off">
+      <label>Note (optional)</label><input id="r-note" placeholder="Extra details">
+      <div class="row"><div><label>Date</label><input id="r-date" type="date"></div><div><label>Time</label><input id="r-time" type="time"></div></div>
+      <div class="rchips"><button class="rchip" data-rp="60">In 1 hour</button><button class="rchip" data-rp="tonight">Tonight 8 PM</button><button class="rchip" data-rp="tomorrow">Tomorrow 9 AM</button></div>
+      <label>Repeat</label><select id="r-rep"><option value="none">Does not repeat</option><option value="daily">Every day</option><option value="weekly">Every week</option><option value="monthly">Every month</option><option value="yearly">Every year</option></select>
+      <div class="vm" id="r-msg"></div>
+      <button class="btn" style="margin-top:8px" id="r-add">Add reminder</button><button class="btn ghost" id="r-cancel" style="display:none">Cancel</button><button class="btn ghost del" id="r-del" style="display:none">Delete reminder</button></div>
+    <div class="card"><h2>Alarm settings</h2><div class="sub">Alarms ring with sound and vibration while this app is open. To be alerted when the app is closed, tap Google Calendar or Download .ics on a reminder to add it to your phone's calendar.</div>
+      <div class="rbt" style="margin-top:12px"><button class="sb" id="r-test">Test alarm</button><button class="sb" id="r-notif">Turn on notifications</button></div><div class="sub" id="r-nst" style="margin-top:8px"></div></div>
+    <div id="r-list"></div>
+  </div>
   <div id="n-vault" style="display:none"></div>
 </section>
 
@@ -242,6 +311,15 @@ nav .t.on::after{content:"";position:absolute;left:28%;right:28%;top:-5px;height
 </div></nav>
 <button class="fab" id="fab" aria-label="Add money entry">+</button>
 
+<div class="sh" id="psh"><div class="bk" id="psh-bk"></div><div class="pn">
+  <div id="psh-t" style="font-weight:800;font-size:18px;text-align:center"></div><div class="sub" id="psh-s" style="text-align:center"></div>
+  <input id="psh-amt" class="amtin" type="number" inputmode="decimal" min="0" placeholder="0" aria-label="Amount">
+  <div class="sub" id="psh-pre" style="text-align:center;font-weight:700;color:var(--text)"></div>
+  <div class="row"><div><label style="margin-top:6px">Date</label><input id="psh-date" type="date"></div><div id="psh-accw"><label style="margin-top:6px">Account</label><select id="psh-acc"></select></div></div>
+  <label id="psh-txw" style="display:flex;align-items:center;gap:10px;margin-top:14px;color:var(--text);font-size:15px"><input id="psh-tx" type="checkbox" style="width:22px;height:22px;padding:0"> Also record it in my accounts</label>
+  <button class="btn" id="psh-save">Save</button>
+</div></div>
+
 <div class="sh" id="sh"><div class="bk" id="bk"></div><div class="pn">
   <div class="seg" id="fseg" style="margin-top:0"><button data-t="expense" class="on">Spending</button><button data-t="income">Income</button><button data-t="invest">Investment</button></div>
   <div id="f-title" style="text-align:center;font-weight:700;display:none;margin-top:4px"></div>
@@ -254,6 +332,15 @@ nav .t.on::after{content:"";position:absolute;left:28%;right:28%;top:-5px;height
   <button class="btn ghost del" id="f-del" style="display:none">Delete entry</button>
 </div></div>
 
+<div class="al" id="al" role="alertdialog" aria-modal="true" aria-labelledby="al-t"><div class="alb">
+  <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+  <div class="sub" style="margin-top:6px">Reminder</div><div class="alm" id="al-tm"></div><div class="alt" id="al-t"></div><div class="sub" id="al-n" style="margin-top:6px"></div>
+  <div class="alr"><button class="btn ghost" id="al-snz">Snooze 10 min</button><button class="btn" id="al-done">Done</button></div></div></div>
+
+<div class="cf" id="cf" role="alertdialog" aria-modal="true" aria-labelledby="cf-t"><div class="bk" id="cf-bk"></div><div class="cb">
+  <div class="cft" id="cf-t"></div><div class="sub" id="cf-m"></div>
+  <div class="cfr"><button class="btn ghost" id="cf-no">Cancel</button><button class="btn" id="cf-yes">Yes, delete</button></div></div></div>
+
 <div class="lock" id="lock"><div class="box"><h2>💰 My Money</h2><div class="sub">Enter your PIN to open</div>
   <input id="pin-in" type="password" inputmode="numeric" maxlength="8" autocomplete="off" aria-label="PIN"><div id="pin-msg" class="sub" style="color:var(--rose);min-height:20px;margin-top:8px"></div>
   <button class="btn" id="pin-go">Unlock</button></div></div>
@@ -262,26 +349,26 @@ nav .t.on::after{content:"";position:absolute;left:28%;right:28%;top:-5px;height
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const KINDS=['Stocks','Mutual fund','Gold','Crypto','Fixed deposit','Real estate','Business','Other'];
 const ICO={Food:'🍽️',Rent:'🏠',Transport:'🚌',Bills:'🧾',Shopping:'🛍️',Health:'💊',Education:'🎓',Entertainment:'🎬',Salary:'💼',Business:'🏪',Gift:'🎁',Stocks:'📈','Mutual fund':'📊',Gold:'🪙',Crypto:'₿','Fixed deposit':'🏦','Real estate':'🏘️'};
-const D={cur:'Rs',tx:[],inv:[],acc:[{id:'a1',name:'Cash',open:0},{id:'a2',name:'Bank',open:0},{id:'a3',name:'Wallet',open:0}],notes:[],plans:[],wk:0,cats:{exp:['Food','Rent','Transport','Bills','Shopping','Health','Education','Entertainment','Other'],inc:['Salary','Business','Gift','Other']},bud:{month:0,cat:{}},seen:''};
+const D={cur:'Rs',tx:[],inv:[],acc:[{id:'a1',name:'Cash',open:0},{id:'a2',name:'Bank',open:0},{id:'a3',name:'Wallet',open:0}],notes:[],plans:[],dues:[],rems:[],wk:0,cats:{exp:['Food','Rent','Transport','Bills','Shopping','Health','Education','Entertainment','Other'],inc:['Salary','Business','Gift','Other']},bud:{month:0,cat:{}},seen:''};
 let S=D;try{const r=localStorage.getItem('mm_v1');if(r)S={...D,...JSON.parse(r)}}catch(e){}
-const fix=()=>{S.cats={...D.cats,...S.cats};S.bud={month:0,cat:{},...S.bud};S.bud.cat=S.bud.cat||{};['tx','inv','notes','plans'].forEach(k=>S[k]=S[k]||[]);if(!S.acc||!S.acc.length)S.acc=D.acc;S.wk=+S.wk||0;S.hideStart=S.hideStart!==false};fix();
+const fix=()=>{S.cats={...D.cats,...S.cats};S.bud={month:0,cat:{},...S.bud};S.bud.cat=S.bud.cat||{};['tx','inv','notes','plans','dues','rems'].forEach(k=>S[k]=S[k]||[]);if(!S.acc||!S.acc.length)S.acc=D.acc;S.wk=+S.wk||0;S.hideStart=S.hideStart!==false};fix();
 let cdb=null,ct=null,busy=false,again=false,dirty=false,syncS='wait',unlocked=false;const known=new Set(),last={};
 const SYN={wait:'Connecting...',ok:'Synced to your account',off:'Not signed in. Saved on this device only.',err:'Sync paused. Will retry.'};
-const dk=k=>'tx'+k.replace('-',''),nk=k=>'nt'+k.replace('-',''),pk=k=>'pl'+k.replace('-','');
+const dk=k=>'tx'+k.replace('-',''),nk=k=>'nt'+k.replace('-',''),pk=k=>'pl'+k.replace('-',''),uk=k=>'du'+k.replace('-','');
 function setSync(s){if(s===syncS)return;syncS=s;const e=$('#sync-st');if(e)e.textContent=SYN[s];const t=$('#today');if(t&&window.render)render()}
 const save=()=>{try{localStorage.setItem('mm_v1',JSON.stringify(S))}catch(e){}if(cdb){clearTimeout(ct);ct=setTimeout(push,700)}else dirty=true};
 async function push(){if(!cdb)return;if(busy){again=true;return}busy=true;
-  try{const by={},nb={};S.tx.forEach(t=>{const k=t.date.slice(0,7);(by[k]=by[k]||[]).push(t);known.add(k)});S.notes.forEach(t=>{const k=t.date.slice(0,7);(nb[k]=nb[k]||[]).push(t);known.add(k)});const pb={};S.plans.forEach(t=>{const k=t.date.slice(0,7);(pb[k]=pb[k]||[]).push(t);known.add(k)});
-    const docs={meta:JSON.stringify({...S,tx:[],notes:[],plans:[],months:[...known]})};known.forEach(k=>{docs[dk(k)]=JSON.stringify(by[k]||[]);docs[nk(k)]=JSON.stringify(nb[k]||[]);docs[pk(k)]=JSON.stringify(pb[k]||[])});
+  try{const by={},nb={};S.tx.forEach(t=>{const k=t.date.slice(0,7);(by[k]=by[k]||[]).push(t);known.add(k)});S.notes.forEach(t=>{const k=t.date.slice(0,7);(nb[k]=nb[k]||[]).push(t);known.add(k)});const pb={};S.plans.forEach(t=>{const k=t.date.slice(0,7);(pb[k]=pb[k]||[]).push(t);known.add(k)});const ub={};S.dues.forEach(t=>{const k=t.date.slice(0,7);(ub[k]=ub[k]||[]).push(t);known.add(k)});
+    const docs={meta:JSON.stringify({...S,tx:[],notes:[],plans:[],dues:[],months:[...known]})};known.forEach(k=>{docs[dk(k)]=JSON.stringify(by[k]||[]);docs[nk(k)]=JSON.stringify(nb[k]||[]);docs[pk(k)]=JSON.stringify(pb[k]||[]);docs[uk(k)]=JSON.stringify(ub[k]||[])});
     for(const k in docs){if(last[k]!==docs[k]){await cdb.doc(k).set({d:docs[k]});last[k]=docs[k]}}setSync('ok')}
   catch(e){setSync('err');clearTimeout(ct);ct=setTimeout(push,15000)}
   busy=false;if(again){again=false;push()}}
 async function cloudInit(){try{const db=await claude.use('db'),us=await claude.use('user');if(!db||!us){setSync('off');return}
   const id=await us.id(),c=db.collection('data/users/'+id),m=await c.doc('meta').get(),first=localStorage.getItem('mm_sync')!==id;
-  if(m.exists){const meta=JSON.parse(m.data().d),ms=meta.months||[],parts=await Promise.all(ms.map(k=>c.doc(dk(k)).get())),np=await Promise.all(ms.map(k=>c.doc(nk(k)).get())),pq=await Promise.all(ms.map(k=>c.doc(pk(k)).get())),tx=[],notes=[],plans=[];
-    parts.forEach(p=>{if(p.exists)tx.push(...JSON.parse(p.data().d))});np.forEach(p=>{if(p.exists)notes.push(...JSON.parse(p.data().d))});pq.forEach(p=>{if(p.exists)plans.push(...JSON.parse(p.data().d))});const cl={...meta,tx,notes,plans};delete cl.months;cl.inv=cl.inv||[];
-    if(first||dirty){const ti=new Set(tx.map(x=>x.id)),ii=new Set(cl.inv.map(x=>x.id));S.tx.forEach(x=>{if(!ti.has(x.id))cl.tx.push(x)});S.inv.forEach(x=>{if(!ii.has(x.id))cl.inv.push(x)});const ni=new Set(notes.map(x=>x.id));S.notes.forEach(x=>{if(!ni.has(x.id))cl.notes.push(x)});cl.plans=cl.plans||[];const pi=new Set(plans.map(x=>x.id));S.plans.forEach(x=>{if(!pi.has(x.id))cl.plans.push(x)})}
-    S={...D,...cl};fix();lockVault();last.meta=m.data().d;ms.forEach((k,i)=>{known.add(k);if(parts[i].exists)last[dk(k)]=parts[i].data().d;if(np[i].exists)last[nk(k)]=np[i].data().d;if(pq[i].exists)last[pk(k)]=pq[i].data().d})}
+  if(m.exists){const meta=JSON.parse(m.data().d),ms=meta.months||[],parts=await Promise.all(ms.map(k=>c.doc(dk(k)).get())),np=await Promise.all(ms.map(k=>c.doc(nk(k)).get())),pq=await Promise.all(ms.map(k=>c.doc(pk(k)).get())),uq=await Promise.all(ms.map(k=>c.doc(uk(k)).get())),tx=[],notes=[],plans=[],dues=[];
+    parts.forEach(p=>{if(p.exists)tx.push(...JSON.parse(p.data().d))});np.forEach(p=>{if(p.exists)notes.push(...JSON.parse(p.data().d))});pq.forEach(p=>{if(p.exists)plans.push(...JSON.parse(p.data().d))});uq.forEach(p=>{if(p.exists)dues.push(...JSON.parse(p.data().d))});const cl={...meta,tx,notes,plans,dues};delete cl.months;cl.inv=cl.inv||[];
+    if(first||dirty){const ti=new Set(tx.map(x=>x.id)),ii=new Set(cl.inv.map(x=>x.id));S.tx.forEach(x=>{if(!ti.has(x.id))cl.tx.push(x)});S.inv.forEach(x=>{if(!ii.has(x.id))cl.inv.push(x)});const ni=new Set(notes.map(x=>x.id));S.notes.forEach(x=>{if(!ni.has(x.id))cl.notes.push(x)});cl.plans=cl.plans||[];const pi=new Set(plans.map(x=>x.id));S.plans.forEach(x=>{if(!pi.has(x.id))cl.plans.push(x)});cl.dues=cl.dues||[];const ui=new Set(dues.map(x=>x.id));S.dues.forEach(x=>{if(!ui.has(x.id))cl.dues.push(x)});cl.rems=cl.rems||[];const ri=new Set(cl.rems.map(x=>x.id));S.rems.forEach(x=>{if(!ri.has(x.id))cl.rems.push(x)})}
+    S={...D,...cl};fix();lockVault();last.meta=m.data().d;ms.forEach((k,i)=>{known.add(k);if(parts[i].exists)last[dk(k)]=parts[i].data().d;if(np[i].exists)last[nk(k)]=np[i].data().d;if(pq[i].exists)last[pk(k)]=pq[i].data().d;if(uq[i].exists)last[uk(k)]=uq[i].data().d})}
   cdb=c;localStorage.setItem('mm_sync',id);try{localStorage.setItem('mm_v1',JSON.stringify(S))}catch(e){}
   $('#cur').value=S.cur;$('#bm').value=S.bud.month||'';render();pinUI();lockCheck();await push()}catch(e){setSync('off')}}
 async function hp(p){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('mm|'+p));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
@@ -357,7 +444,7 @@ function render(){
   const ik=stat('Invested',fmt(po.a),'iv')+stat('Value now',fmt(po.v))+stat('Gain or loss',(po.g>=0?'+':'-')+fmt(Math.abs(po.g)),po.g>=0?'inc':'exp');$('#i-k').innerHTML=ik;
   $('#i-dn').innerHTML=donut(grp(S.inv,'kind',i=>i.val));$('#i-list').innerHTML=S.inv.length?sorted(S.inv).map(invRow).join(''):'<div class="empty">No investments yet.</div>';
   // review
-  renderNotes();renderAct();
+  renderNotes();renderAct();renderDue();renderRem();
   const f=feedback(rm),rc=f.c;$('#r-name').textContent=mname(rm);$('#r-next').disabled=rm>=CUR;
   const col=f.score<40?'var(--rose)':'var(--jade)',L2=2*Math.PI*42;
   $('#r-rings').innerHTML=f.none?'<div class="empty">No data for this month.</div>':`<div><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="rgba(128,138,160,.25)" stroke-width="9"/><circle cx="50" cy="50" r="42" fill="none" stroke="${col}" stroke-width="9" stroke-linecap="round" stroke-dasharray="${f.score/100*L2} ${L2}" transform="rotate(-90 50 50)"/><text x="50" y="58" text-anchor="middle" font-size="26" font-weight="800" style="fill:var(--text)">${f.score}</text></svg><small>Money score out of 100</small></div>`;
@@ -365,6 +452,9 @@ function render(){
   $('#r-apply').innerHTML=(!f.none&&rc.inc>0)?`<button class="btn ghost" data-bud="${Math.round(rc.inc*.8)}">Use ${fmt(Math.round(rc.inc*.8))} as monthly budget (80% of income)</button>`:'';
   $('#r-k').innerHTML=stat('Income',fmt(rc.inc),'inc')+stat('Spent',fmt(rc.exp),'exp')+stat('Invested',fmt(rc.invested),'iv');$('#r-dn').innerHTML=donut(rc.cats);
 }
+let cfYes=null;
+function askConfirm(title,msg,label,fn){$('#cf-t').textContent=title;$('#cf-m').textContent=msg;const info=label===null;$('#cf-yes').style.display=info?'none':'';$('#cf-yes').textContent=label||'Yes, delete';$('#cf-no').textContent=info?'OK':'Cancel';$('#cf-no').style.gridColumn=info?'1 / -1':'';cfYes=fn;$('#cf').classList.add('on');$('#cf-no').focus()}
+const cfClose=()=>{$('#cf').classList.remove('on');cfYes=null};
 const enc=new TextEncoder(),dec=new TextDecoder();
 const b64=u=>{let s='';new Uint8Array(u).forEach(x=>s+=String.fromCharCode(x));return btoa(s)},ub=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 let vkey=null,vdata=null,vedit=null,vdel=false,vreset=false,vt=null;const vshown=new Set();
@@ -405,7 +495,7 @@ async function vault(a,id,t){vbump();
   if(a==='unlock'){const p=$('#vu-p').value;if(!p)return vmsg('Enter your master password.');t.disabled=true;t.textContent='Unlocking...';
     try{const k=await dkey(p,ub(S.vault.salt),S.vault.it),pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:ub(S.vault.iv)},k,ub(S.vault.ct));vkey=k;vdata=JSON.parse(dec.decode(pt));vbump();renderVault()}
     catch(e){renderVault();vmsg('Wrong master password. Try again.')}return}
-  if(a==='reset'){if(!vreset){vreset=true;renderVault();setTimeout(()=>{vreset=false;if(!vkey)renderVault()},4000);return}vreset=false;delete S.vault;save();return renderVault()}
+  if(a==='reset')return askConfirm('Erase the whole vault?','All saved passwords will be deleted and cannot be recovered. Only do this if you forgot the master password.','Yes, erase everything',()=>{delete S.vault;save();renderVault()});
   if(a==='lock')return lockVault();if(!vkey)return;
   if(a==='gen'){const cs='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789!@#$%&*?',r=crypto.getRandomValues(new Uint32Array(16)),i=$('#vf-pw');i.value=[...r].map(x=>cs[x%cs.length]).join('');i.type='text';return}
   if(a==='vtog'){const i=$('#vf-pw');i.type=i.type==='password'?'text':'password';t.textContent=i.type==='password'?'Show':'Hide';return}
@@ -413,7 +503,7 @@ async function vault(a,id,t){vbump();
     if(vedit){const x=vdata.items.find(i=>i.id===vedit);if(x)Object.assign(x,o)}else vdata.items.push({id:uid(),...o});vedit=null;await vseal();return renderVault()}
   if(a==='edit'){vedit=id;renderVault();return window.scrollTo(0,0)}
   if(a==='cancel'){vedit=null;return renderVault()}
-  if(a==='del'){if(!vdel){vdel=true;t.textContent='Tap again to delete';return}vdel=false;vdata.items=vdata.items.filter(x=>x.id!==vedit);vedit=null;await vseal();return renderVault()}
+  if(a==='del')return askConfirm('Delete this password?','It will be removed from your vault permanently.','Yes, delete',async()=>{if(!vkey)return;vdata.items=vdata.items.filter(x=>x.id!==vedit);vedit=null;await vseal();renderVault()});
   if(a==='show'){if(vshown.has(id))vshown.delete(id);else{vshown.add(id);setTimeout(()=>{vshown.delete(id);if(vkey)renderVault()},10000)}return renderVault()}
   if(a==='copy'){const x=vdata.items.find(i=>i.id===id);try{await navigator.clipboard.writeText(x.pw);t.textContent='Copied';setTimeout(()=>{try{navigator.clipboard.writeText('')}catch(e){}},30000)}catch(e){t.textContent='Copy failed'}return}
   if(a==='chpw'){const p=$('#vn-1').value;if(p.length<8)return vmsg('Use at least 8 characters.','v-msg2');if(p!==$('#vn-2').value)return vmsg('The two passwords do not match.','v-msg2');
@@ -469,11 +559,74 @@ function plReview(){const L=plSet(plP,plD),tot=L.length,box=$('#p-rev');
   box.innerHTML=`<h2>${PL[plP]} review</h2><div class="sub" style="margin:-4px 0 8px">Counts ${plP==='daily'?'daily plans':'daily plans and '+PL[plP].toLowerCase()+' or smaller plans'} in this ${PN[plP]}.</div>${it.map(x=>`<div class="fi ${x.t}">${esc(x.s)}</div>`).join('')}${bk}${chart}`+
     (top.length?`<div class="sub" style="margin-top:12px">Top rated: ${top.map(x=>esc(x.title)+' ('+x.rating+')').join(', ')}</div>`:'')+(open.length?`<div class="sub" style="margin-top:6px">Still open: ${open.map(x=>esc(x.title)).join(', ')}</div>`:'')+
     (un.length?`<button class="btn ghost" data-carry="1">Move ${un.length} unfinished to next ${PN[plP]}</button>`:'')}
+let duK='payable',duE=null,duDel=false,duPay=null,duPE=null;
+const DK={payable:{t:'Accounts payable',sub:'Money you owe to others. Each entry shows Total minus Paid equals Left to pay.',who:'Who do you owe?',a:'a payable',pay:'Record payment',paid:'Paid',left:'Left to pay',ph:'e.g. Landlord, shop, friend',to:'to'},receivable:{t:'Accounts receivable',sub:'Money others owe to you. Each entry shows Total minus Received equals Left to receive.',who:'Who owes you?',a:'a receivable',pay:'Record receipt',paid:'Received',left:'Left to receive',ph:'e.g. Friend, customer, relative',to:'from'}};
+const duPaid=x=>sum(x.pays||[],q=>q.amt),duLeft=x=>Math.max(0,x.amt-duPaid(x)),duDays=(a,b)=>Math.round((new Date(b+'T00:00')-new Date(a+'T00:00'))/864e5);
+const duStat=x=>{if(duLeft(x)<=0)return{k:'ok',t:'Settled'};if(!x.due)return{k:'',t:'No due date'};const n=duDays(TODAY,x.due);return n<0?{k:'late',t:'Overdue '+(-n)+(n===-1?' day':' days')}:n===0?{k:'warn',t:'Due today'}:{k:'',t:'Due in '+n+(n===1?' day':' days')}};
+function duEdit(x){duE=x?x.id:null;duDel=false;const K=DK[duK];$('#d-who').value=x?x.who:'';$('#d-amt').value=x?x.amt:'';$('#d-paid').value='';$('#d-paidw').style.display=x?'none':'';$('#d-paidl').textContent='Already '+K.paid.toLowerCase()+' (optional)';$('#d-due').value=x?x.due||'':'';$('#d-note').value=x?x.note||'':'';
+  $('#d-add').textContent=x?'Save changes':'Add '+duK;$('#d-cancel').style.display=$('#d-del').style.display=x?'':'none';$('#d-del').textContent='Delete entry';$('#d-ft').textContent=x?'Edit entry':'Add '+K.a;$('#d-pl').textContent=K.who;$('#d-who').placeholder=K.ph}
+function renderDue(){const box=$('#r-due');if(!box)return;const K=DK[duK];box.className='d-'+duK;$$('#dseg button').forEach(b=>b.classList.toggle('on',b.dataset.dk===duK));
+  const L=S.dues.filter(x=>x.kind===duK),od=L.filter(x=>duLeft(x)>0&&x.due&&x.due<TODAY).length;
+  $('#d-head').innerHTML=`<h2>${K.t}</h2><div class="sub" style="margin:-4px 0 12px">${K.sub}</div><div class="stats" style="margin:0">${stat('Total',fmt(sum(L,x=>x.amt)))}${stat(K.paid,fmt(sum(L,duPaid)),'inc')}${stat(K.left,fmt(sum(L,duLeft)),duK==='payable'?'exp':'iv')}</div>${od?`<div class="st r" style="margin:12px 0 0">${od} overdue</div>`:''}`;
+  $('#d-paidl').textContent='Already '+K.paid.toLowerCase()+' (optional)';if(!duE){$('#d-ft').textContent='Add '+K.a;$('#d-pl').textContent=K.who;$('#d-who').placeholder=K.ph;$('#d-add').textContent='Add '+duK}
+  const card=x=>{const s=duStat(x),lf=duLeft(x),ps=(x.pays||[]).slice().sort((a,b)=>b.date.localeCompare(a.date));
+    return`<div class="due"><div class="ph" style="margin:0"><button class="dnm" data-de="${x.id}">${esc(x.who)}</button><span class="dpill ${s.k}">${s.t}</span></div>
+    <div class="calc"><div><small>Total</small><b>${fmt(x.amt)}</b></div><i>&minus;</i><div><small>${K.paid}</small><b class="inc">${fmt(duPaid(x))}</b></div><i>=</i><div><small>${K.left}</small><b class="${duK==='payable'?'exp':'iv'}">${fmt(lf)}</b></div></div>
+    <div class="track"><div class="fill" style="width:${clamp(x.amt?duPaid(x)/x.amt*100:0,0,100)}%;background:var(--bd)"></div></div>
+    ${x.note||x.due?`<small>${[x.note?esc(x.note):'',x.due?'Due '+sd(x.due):''].filter(Boolean).join(', ')}</small>`:''}
+    ${ps.map(q=>`<div class="dpay"><button class="dpl" data-dq="${x.id}|${q.id}"><small>${K.paid} ${fmt(q.amt)} on ${sd(q.date)}</small><u>Edit</u></button><button class="x" data-dx="${x.id}|${q.id}" aria-label="Remove payment">×</button></div>`).join('')}
+    ${lf>0?`<button class="btn ghost" data-dp="${x.id}" style="margin-top:6px">${K.pay}</button>`:''}</div>`};
+  const open=L.filter(x=>duLeft(x)>0).sort((a,b)=>(a.due||'9').localeCompare(b.due||'9')),done=L.filter(x=>duLeft(x)<=0).sort((a,b)=>b.ts-a.ts).slice(0,10);
+  $('#d-list').innerHTML=(open.length?`<div class="hd"><h2>Open</h2><small>${open.length}</small></div>`+open.map(card).join(''):`<div class="card empty">${L.length?'Everything is settled.':'No entries yet. Add the first one above.'}</div>`)+(done.length?`<div class="hd"><h2>Settled</h2></div>`+done.map(card).join(''):'')}
+function duPre(){const x=S.dues.find(y=>y.id===duPay);if(!x)return;const pe=duPE?(x.pays||[]).find(y=>y.id===duPE):null,base=Math.max(0,x.amt-(duPaid(x)-(pe?pe.amt:0))),a=parseFloat($('#psh-amt').value)||0;
+  $('#psh-pre').textContent=`${DK[x.kind].left} after this: ${fmt(Math.max(0,base-a))}${a>base?' (more than the balance)':''}`}
+function duSheet(id,pid){const x=S.dues.find(y=>y.id===id);if(!x)return;duPay=id;duPE=pid||null;const K=DK[x.kind],pe=pid?(x.pays||[]).find(y=>y.id===pid):null,base=Math.max(0,x.amt-(duPaid(x)-(pe?pe.amt:0)));
+  $('#psh').dataset.k=x.kind;$('#psh-t').textContent=pe?`Edit ${K.paid.toLowerCase()} amount`:`${K.pay} ${K.to} ${x.who}`;$('#psh-s').textContent=`Total ${fmt(x.amt)}, ${K.left.toLowerCase()} before this: ${fmt(base)}`;
+  $('#psh-amt').value=pe?pe.amt:base;$('#psh-date').value=pe?pe.date:TODAY;$('#psh-acc').innerHTML=S.acc.map(a=>`<option value="${a.id}">${esc(a.name)}</option>`).join('');$('#psh-tx').checked=false;
+  $('#psh-accw').style.display=$('#psh-txw').style.display=pe?'none':'';$('#psh-save').textContent=pe?'Save changes':'Save';duPre();$('#psh').classList.add('on')}
+const BELL='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>';
+const REPL={none:'',daily:'every day',weekly:'every week',monthly:'every month',yearly:'every year'},RRL={daily:'DAILY',weekly:'WEEKLY',monthly:'MONTHLY',yearly:'YEARLY'};
+let remE=null,alarmId=null,alarmLoop=null,actx=null;
+const remWhen=x=>new Date(x.date+'T'+x.time+':00').getTime();
+const tmLabel=t=>new Date('1970-01-01T'+t+':00').toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'});
+const rdl=d=>d===TODAY?'Today':d===addD(TODAY,1)?'Tomorrow':d===YDAY?'Yesterday':new Date(d+'T00:00').toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short',year:d.slice(0,4)!==CUR.slice(0,4)?'numeric':undefined});
+const agoText=ms=>ms<36e5?Math.max(1,Math.round(ms/6e4))+' min ago':ms<864e5?Math.round(ms/36e5)+' h ago':Math.round(ms/864e5)+(Math.round(ms/864e5)===1?' day ago':' days ago');
+const remRel=x=>{if(x.done)return'Done';const ms=remWhen(x)-Date.now();if(ms<=0)return'Overdue, '+agoText(-ms);if(ms<36e5)return'In '+Math.max(1,Math.round(ms/6e4))+' min';if(ms<864e5&&x.date===TODAY)return'In '+Math.round(ms/36e5)+' h';return rdl(x.date)};
+const addRep=(d,rp,dom)=>{const[y,m,x]=ymd(d),dd=dom||x;if(rp==='daily')return addD(d,1);if(rp==='weekly')return addD(d,7);
+  if(rp==='monthly'){const t=new Date(y,m,1);return iso(new Date(t.getFullYear(),t.getMonth(),Math.min(dd,new Date(t.getFullYear(),t.getMonth()+1,0).getDate())))}
+  return iso(new Date(y+1,m-1,Math.min(dd,new Date(y+1,m,0).getDate())))};
+function remFinish(r){r.snooze=0;if(r.repeat&&r.repeat!=='none'){let g=0;do{r.date=addRep(r.date,r.repeat,r.dom);g++}while(remWhen(r)<=Date.now()&&g<2000)}else r.done=true}
+function audioInit(){try{if(!actx)actx=new(window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume()}catch(e){}}
+function beep(){try{if(!actx||actx.state!=='running')return;const t=actx.currentTime;[0,.25,.5].forEach(o=>{const os=actx.createOscillator(),g=actx.createGain();os.type='sine';os.frequency.value=880;g.gain.setValueAtTime(.0001,t+o);g.gain.exponentialRampToValueAtTime(.3,t+o+.02);g.gain.exponentialRampToValueAtTime(.0001,t+o+.2);os.connect(g);g.connect(actx.destination);os.start(t+o);os.stop(t+o+.22)})}catch(e){}}
+function remRing(r){if(alarmId)return;alarmId=r.id;const late=Date.now()-remWhen(r);
+  $('#al-t').textContent=r.title;$('#al-tm').textContent=tmLabel(r.time);$('#al-n').textContent=(r.note?r.note+'. ':'')+(late>90000?'Was due '+rdl(r.date)+', '+agoText(late):'Due now');
+  $('#al').classList.add('on');$('#al-done').focus();audioInit();beep();clearInterval(alarmLoop);alarmLoop=setInterval(()=>{beep();try{navigator.vibrate&&navigator.vibrate([300,150,300])}catch(e){}},1600);
+  try{if('Notification' in window&&Notification.permission==='granted')new Notification('Reminder: '+r.title,{body:r.note||tmLabel(r.time)})}catch(e){}}
+function remStop(){alarmId=null;clearInterval(alarmLoop);$('#al').classList.remove('on')}
+function remCheck(){if(alarmId)return;const n=Date.now(),r=S.rems.filter(x=>!x.done&&remWhen(x)<=n&&(!x.snooze||x.snooze<=n)).sort((a,b)=>remWhen(a)-remWhen(b))[0];if(r)remRing(r)}
+function remPreset(k){const n=new Date();let dt;if(k==='60')dt=new Date(n.getTime()+36e5);else if(k==='tonight'){dt=new Date(n.getFullYear(),n.getMonth(),n.getDate(),20,0);if(dt<=n)dt=new Date(dt.getTime()+864e5)}else dt=new Date(n.getFullYear(),n.getMonth(),n.getDate()+1,9,0);
+  $('#r-date').value=iso(dt);$('#r-time').value=String(dt.getHours()).padStart(2,'0')+':'+String(dt.getMinutes()).padStart(2,'0')}
+function remEdit(x){remE=x?x.id:null;$('#r-msg').textContent='';$('#r-title').value=x?x.title:'';$('#r-note').value=x?x.note||'':'';$('#r-rep').value=x?x.repeat||'none':'none';if(x){$('#r-date').value=x.date;$('#r-time').value=x.time}else remPreset('60');
+  $('#r-ft').textContent=x?'Edit reminder':'New reminder';$('#r-add').textContent=x?'Save changes':'Add reminder';$('#r-cancel').style.display=$('#r-del').style.display=x?'':'none'}
+const remGcal=x=>{const p=n=>String(n).padStart(2,'0'),[y,m,d]=ymd(x.date),[hh,mm]=x.time.split(':').map(Number),e=new Date(y,m-1,d,hh,mm+15),f=(Y,M,D,H,N)=>`${Y}${p(M)}${p(D)}T${p(H)}${p(N)}00`;
+  let u='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(x.title)+'&dates='+f(y,m,d,hh,mm)+'/'+f(e.getFullYear(),e.getMonth()+1,e.getDate(),e.getHours(),e.getMinutes());
+  if(x.note)u+='&details='+encodeURIComponent(x.note);if(RRL[x.repeat])u+='&recur='+encodeURIComponent('RRULE:FREQ='+RRL[x.repeat]);return u};
+function remIcs(x){const p=n=>String(n).padStart(2,'0'),[y,m,d]=ymd(x.date),[hh,mm]=x.time.split(':').map(Number),e=new Date(y,m-1,d,hh,mm+15),q=s=>String(s||'').replace(/[\\;,]/g,'\\$&').replace(/\n/g,'\\n');
+  return['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//My Money//EN','BEGIN:VEVENT','UID:'+x.id+'@mymoney','DTSTAMP:'+new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z',`DTSTART:${y}${p(m)}${p(d)}T${p(hh)}${p(mm)}00`,`DTEND:${e.getFullYear()}${p(e.getMonth()+1)}${p(e.getDate())}T${p(e.getHours())}${p(e.getMinutes())}00`,'SUMMARY:'+q(x.title),x.note?'DESCRIPTION:'+q(x.note):'',RRL[x.repeat]?'RRULE:FREQ='+RRL[x.repeat]:'','BEGIN:VALARM','TRIGGER:PT0M','ACTION:DISPLAY','DESCRIPTION:'+q(x.title),'END:VALARM','END:VEVENT','END:VCALENDAR'].filter(Boolean).join('\r\n')}
+function remDl(x){try{const u=URL.createObjectURL(new Blob([remIcs(x)],{type:'text/calendar'})),a=document.createElement('a');a.href=u;a.download='reminder.ics';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),3000)}catch(e){}}
+function renderRem(){const n=Date.now(),act=S.rems.filter(x=>!x.done).sort((a,b)=>remWhen(a)-remWhen(b)),late=act.filter(x=>remWhen(x)<=n),up=act.filter(x=>remWhen(x)>n),dn=S.rems.filter(x=>x.done).sort((a,b)=>remWhen(b)-remWhen(a)).slice(0,10);
+  const card=(x,k)=>`<div class="rem ${k}"><div class="ph" style="margin:0"><button class="rt" data-re="${x.id}">${esc(x.title)}</button><span class="rpill ${k}">${remRel(x)}</span></div>
+    <div class="rtm"><b>${tmLabel(x.time)}</b><small>${rdl(x.date)}${x.repeat&&x.repeat!=='none'?', repeats '+REPL[x.repeat]:''}</small></div>${x.note?`<small>${esc(x.note)}</small>`:''}
+    <div class="rbt">${x.done?`<button class="sb" data-ro="${x.id}">Reopen</button>`:`<button class="sb" data-rd="${x.id}">Done</button>`}<a class="sb" target="_blank" rel="noopener" href="${remGcal(x)}">Google Calendar</a><button class="sb" data-ri="${x.id}">Download .ics</button></div></div>`;
+  $('#r-list').innerHTML=(late.length?`<div class="hd"><h2>Overdue</h2><small>${late.length}</small></div>`+late.map(x=>card(x,'m')).join(''):'')+(up.length?`<div class="hd"><h2>Upcoming</h2><small>${up.length}</small></div>`+up.map(x=>card(x,'')).join(''):(late.length?'':'<div class="card empty">No reminders yet. Add your first one above.</div>'))+(dn.length?`<div class="hd"><h2>Done</h2></div>`+dn.map(x=>card(x,'d')).join(''):'');
+  $('#h-rem').innerHTML=act.length?act.slice(0,3).map(x=>`<button class="rw" data-v="notes" data-nt="rem"><span class="ei" style="color:${remWhen(x)<=n?'var(--rose)':'var(--c-rem)'}">${BELL}</span><span class="t"><b>${esc(x.title)}</b><small>${remRel(x)}</small></span><span class="amt">${tmLabel(x.time)}</span></button>`).join(''):'<div class="empty">No reminders. Open Write notes, then Reminders, to add one.</div>';
+  const ns=$('#r-nst');if(ns)ns.textContent='Notifications: '+(('Notification' in window)?({granted:'on',denied:'blocked in browser settings',default:'not turned on'}[Notification.permission]||'unknown'):'not supported on this browser')}
+function notesTab(k){$$('#nseg button').forEach(x=>x.classList.toggle('on',x.dataset.nt===k));$('#n-notes').style.display=k==='notes'?'':'none';$('#n-rem').style.display=k==='rem'?'':'none';$('#n-vault').style.display=k==='vault'?'':'none';if(k==='vault')renderVault();else lockVault()}
 function renderSet(){const t=$('#cm-type').value;
   $('#s-acc').innerHTML=S.acc.map((a,i)=>`<div class="ai"><span class="ei">${/bank/i.test(a.name)?'🏦':/cash/i.test(a.name)?'💵':'👛'}</span><b>${esc(a.name)}</b><input type="number" inputmode="decimal" data-ao="${i}" value="${a.open||''}" placeholder="Opening" aria-label="Opening balance"><button class="x" data-ax="${i}" aria-label="Remove">×</button></div>`).join('');
   $('#cm-list').innerHTML=S.cats[t].map((c,i)=>`<div class="ai" style="grid-template-columns:42px 1fr ${t==='exp'?'110px ':''}32px"><span class="ei">${ICO[c]||'🔖'}</span><b>${esc(c)}</b>${t==='exp'?`<input type="number" inputmode="decimal" min="0" placeholder="Budget" data-bi="${i}" value="${S.bud.cat[c]||''}">`:''}<button class="x" data-ci="${i}" aria-label="Remove">×</button></div>`).join('')}
 const pos={};let cv='home';
-function go(v){pos[cv]=window.scrollY;if(v!=='notes'&&vkey)lockVault();cv=v;document.body.dataset.tab=v;$('#fab').style.display=v==='notes'||v==='set'||(v==='rec'&&$('#r-act').style.display!=='none')?'none':'';$$('nav .t').forEach(x=>x.classList.toggle('on',x.dataset.v===v));$$('.view').forEach(x=>x.classList.toggle('on',x.id==='v-'+v));
+function go(v){pos[cv]=window.scrollY;if(v!=='notes'&&vkey)lockVault();cv=v;document.body.dataset.tab=v;$('#fab').style.display=v==='notes'||v==='set'||(v==='rec'&&$('#r-fin').style.display==='none')?'none':'';$$('nav .t').forEach(x=>x.classList.toggle('on',x.dataset.v===v));$$('.view').forEach(x=>x.classList.toggle('on',x.id==='v-'+v));
   if(v==='set')renderSet();if(v==='rev'&&rm===shift(CUR,-1)&&S.seen!==rm){S.seen=rm;save();const b=$('#h-ban');if(b)b.innerHTML=''}
   window.scrollTo(0,v==='home'||v==='rev'?0:(pos[v]||0))}
 function setF(t){ft=t;$('#sh').dataset.k=t;$$('#fseg button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));const inv=t==='invest';
@@ -496,21 +649,46 @@ $('#f-save').onclick=()=>{const a=parseFloat($('#f-amt').value),n=$('#f-name').v
   if(ft==='invest'){if(!n){$('#f-name').focus();return}const v=parseFloat($('#f-val').value),o={name:n,kind:c,date:d,amt:a,val:v>=0?v:a};if(ed)Object.assign(ed.rec,o);else S.inv.push({id:uid(),...o})}
   else{const o={date:d,type:ft,cat:c,txt:n,amt:a,acc:$('#f-acc').value};if(ed)Object.assign(ed.rec,o);else S.tx.push({id:uid(),...o})}
   save();closeSheet();render()};
-$('#f-del').onclick=function(){if(!delArm){delArm=true;this.textContent='Tap again to delete';return}const k=ed.k;S[k]=S[k].filter(x=>x!==ed.rec);save();closeSheet();render()};
+$('#f-del').onclick=()=>askConfirm('Delete this entry?','This '+(ed.k==='inv'?'investment':'record')+' will be removed permanently.','Yes, delete',()=>{const k=ed.k;S[k]=S[k].filter(x=>x!==ed.rec);save();closeSheet();render()});
 $('#n-q').oninput=renderNotes;$('#n-cancel').onclick=()=>noteEdit(null);
 $('#n-save').onclick=()=>{const t=$('#n-txt').value.trim();if(!t){$('#n-txt').focus();return}const d=$('#n-date').value||TODAY;
   if(ne){const n=S.notes.find(x=>x.id===ne);if(n)Object.assign(n,{txt:t,date:d,mood:nm})}else S.notes.push({id:uid(),date:d,mood:nm,txt:t,ts:Date.now()});save();noteEdit(null);render()};
-$('#n-del').onclick=function(){if(!ndel){ndel=true;this.textContent='Tap again to delete';return}S.notes=S.notes.filter(x=>x.id!==ne);save();noteEdit(null);render()};
+$('#n-del').onclick=()=>askConfirm('Delete this note?','The note will be removed permanently.','Yes, delete',()=>{S.notes=S.notes.filter(x=>x.id!==ne);save();noteEdit(null);render()});
 $('#p-prev').onclick=()=>{plD=plMove(plP,plD,-1);plEdit(null);renderAct()};$('#p-next').onclick=()=>{plD=plMove(plP,plD,1);plEdit(null);renderAct()};
 $('#p-cancel').onclick=()=>plEdit(null);$('#wk').onchange=function(){S.wk=+this.value;save();render()};
 $('#p-add').onclick=()=>{const t=$('#p-in').value.trim();if(!t){$('#p-in').focus();return}const n=$('#p-note').value.trim();
   if(plE){const x=S.plans.find(y=>y.id===plE);if(x)Object.assign(x,{title:t,note:n})}else S.plans.push({id:uid(),title:t,note:n,period:plP,date:plStart(plP,plD),done:false,rating:0,ts:Date.now()});
   save();plEdit(null);render()};
-$('#p-del').onclick=function(){if(!plDel){plDel=true;this.textContent='Tap again to delete';return}S.plans=S.plans.filter(x=>x.id!==plE);save();plEdit(null);render()};
+$('#p-del').onclick=()=>askConfirm('Delete this plan?','The plan, its rating and its note will be removed permanently.','Yes, delete',()=>{S.plans=S.plans.filter(x=>x.id!==plE);save();plEdit(null);render()});
+$('#cf-no').onclick=cfClose;$('#cf-bk').onclick=cfClose;$('#cf-yes').onclick=()=>{const f=cfYes;cfClose();if(f)f()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#cf').classList.contains('on'))cfClose()});
 $('#eye').onclick=()=>{hid=!hid;render()};
 $('#hs').onchange=function(){S.hideStart=this.value==='1';save();render()};
 document.addEventListener('click',e=>{const t=e.target;if(hid&&t.children&&t.children.length===0&&(t.textContent||'').includes('****')){hid=false;render();e.stopPropagation();e.preventDefault()}},true);
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&S.hideStart&&!hid){hid=true;render()}});
+$('#d-cancel').onclick=()=>duEdit(null);$('#psh-amt').oninput=duPre;$('#psh-bk').onclick=()=>$('#psh').classList.remove('on');
+$('#d-add').onclick=()=>{const w=$('#d-who').value.trim(),a=parseFloat($('#d-amt').value);if(!w){$('#d-who').focus();return}if(!a||a<=0){$('#d-amt').focus();return}
+  const o={who:w,amt:a,due:$('#d-due').value,note:$('#d-note').value.trim()};
+  if(duE){const x=S.dues.find(y=>y.id===duE);if(x)Object.assign(x,o)}else{const pd=Math.min(parseFloat($('#d-paid').value)||0,a);S.dues.push({id:uid(),kind:duK,...o,date:TODAY,pays:pd>0?[{id:uid(),date:TODAY,amt:pd}]:[],ts:Date.now()})}save();duEdit(null);render()};
+$('#d-del').onclick=()=>askConfirm('Delete this entry?','The entry and its payment history will be removed permanently. Payments you already recorded in your accounts stay in Financial.','Yes, delete',()=>{S.dues=S.dues.filter(x=>x.id!==duE);save();duEdit(null);render()});
+$('#psh-save').onclick=()=>{const x=S.dues.find(y=>y.id===duPay),a=parseFloat($('#psh-amt').value);if(!x)return;if(!a||a<=0){$('#psh-amt').focus();return}
+  const d=$('#psh-date').value||TODAY;
+  if(duPE){const r=(x.pays||[]).find(y=>y.id===duPE);if(r){r.amt=a;r.date=d;const lt=r.tx&&S.tx.find(y=>y.id===r.tx);if(lt){lt.amt=a;lt.date=d}}save();$('#psh').classList.remove('on');render();return}
+  const pay={id:uid(),date:d,amt:a};
+  if($('#psh-tx').checked){const pb=x.kind==='payable',t={id:uid(),date:d,type:pb?'expense':'income',cat:'Other',txt:(pb?'Paid to ':'Received from ')+x.who,amt:a,acc:$('#psh-acc').value};S.tx.push(t);pay.tx=t.id}
+  x.pays=(x.pays||[]).concat(pay);save();$('#psh').classList.remove('on');render()};
+['click','touchstart','keydown'].forEach(ev=>document.addEventListener(ev,audioInit,{passive:true}));
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)remCheck()});
+$('#al-done').onclick=()=>{const id=alarmId;remStop();const r=S.rems.find(x=>x.id===id);if(r){remFinish(r);save();render()}setTimeout(remCheck,300)};
+$('#al-snz').onclick=()=>{const id=alarmId;remStop();const r=S.rems.find(x=>x.id===id);if(r){r.snooze=Date.now()+6e5;save();render()}setTimeout(remCheck,300)};
+$('#r-test').onclick=()=>{audioInit();remRing({id:'test',title:'Test alarm',note:'If you hear a beep, alarms will work while the app is open.',date:TODAY,time:new Date().toTimeString().slice(0,5),repeat:'none'})};
+$('#r-notif').onclick=()=>{try{Notification.requestPermission().then(renderRem)}catch(e){renderRem()}};
+$('#r-cancel').onclick=()=>remEdit(null);
+$('#r-add').onclick=()=>{const t=$('#r-title').value.trim(),d=$('#r-date').value,tm=$('#r-time').value;if(!t){$('#r-msg').textContent='Write what to remind you about.';$('#r-title').focus();return}if(!d||!tm){$('#r-msg').textContent='Choose a date and a time.';return}
+  if(new Date(d+'T'+tm+':00').getTime()<=Date.now()){$('#r-msg').textContent='Choose a time in the future.';return}
+  const o={title:t,note:$('#r-note').value.trim(),date:d,time:tm,repeat:$('#r-rep').value,dom:+d.slice(8),done:false,snooze:0};
+  if(remE){const x=S.rems.find(y=>y.id===remE);if(x)Object.assign(x,o)}else S.rems.push({id:uid(),...o,ts:Date.now()});save();remEdit(null);render()};
+$('#r-del').onclick=()=>askConfirm('Delete this reminder?','The reminder will be removed permanently.','Yes, delete',()=>{S.rems=S.rems.filter(x=>x.id!==remE);save();remEdit(null);render()});
 $('#bm').oninput=function(){S.bud.month=parseFloat(this.value)||0;save();render()};
 $('#cm-type').onchange=renderSet;
 $('#cm-add').onclick=()=>{const t=$('#cm-type').value,n=$('#cm-new').value.trim();if(n&&!S.cats[t].includes(n)){S.cats[t].push(n);$('#cm-new').value='';save();renderSet()}};
@@ -518,35 +696,46 @@ $('#a-add').onclick=()=>{const n=$('#a-new').value.trim();if(n){S.acc.push({id:u
 document.addEventListener('click',e=>{const t=e.target.closest('button');if(!t)return;const d=t.dataset;
   if(d.v&&!t.classList.contains('t'))go(d.v);
   if(d.e){const[k,id]=d.e.split('|'),rec=S[k].find(x=>x.id===id);if(rec)openSheet(null,{k,rec})}
-  if(d.nt){$$('#nseg button').forEach(x=>x.classList.toggle('on',x===t));$('#n-notes').style.display=d.nt==='notes'?'':'none';$('#n-vault').style.display=d.nt==='vault'?'':'none';if(d.nt==='vault')renderVault();else lockVault()}
+  if(d.nt)notesTab(d.nt);
   if(d.va)vault(d.va,d.vi,t);
-  if(d.rt){$$('#rseg button').forEach(x=>x.classList.toggle('on',x===t));$('#r-fin').style.display=d.rt==='fin'?'':'none';$('#r-act').style.display=d.rt==='act'?'':'none';$('#fab').style.display=d.rt==='act'?'none':'';if(d.rt==='act')renderAct()}
+  if(d.rt){$$('#rseg button').forEach(x=>x.classList.toggle('on',x===t));$('#r-fin').style.display=d.rt==='fin'?'':'none';$('#r-act').style.display=d.rt==='act'?'':'none';$('#r-due').style.display=d.rt==='due'?'':'none';$('#fab').style.display=d.rt==='fin'?'':'none';if(d.rt==='act')renderAct();if(d.rt==='due')renderDue()}
   if(d.pp){const[s0,e0]=plRange(plP,plD);if(TODAY>=s0&&TODAY<=e0)plD=TODAY;plP=d.pp;plEdit(null);renderAct()}
   if(d.ac){const x=S.plans.find(y=>y.id===d.ac);if(x){x.done=!x.done;save();render()}}
   if(d.ae){const x=S.plans.find(y=>y.id===d.ae);if(x){plEdit(x);$('#p-form').scrollIntoView({behavior:'smooth',block:'start'})}}
   if(d.as){const[i,n]=d.as.split('|'),x=S.plans.find(y=>y.id===i);if(x){x.rating=x.rating===+n?0:+n;save();render()}}
   if(d.carry){const nd=plStart(plP,plMove(plP,plD,1));plView().filter(x=>!x.done).forEach(x=>x.date=nd);save();render()}
+  if(d.dk){duK=d.dk;duEdit(null);renderDue()}
+  if(d.de){const x=S.dues.find(y=>y.id===d.de);if(x){duK=x.kind;duEdit(x);renderDue();$('#d-form').scrollIntoView({behavior:'smooth',block:'start'})}}
+  if(d.dp)duSheet(d.dp);
+  if(d.dq){const[i,q]=d.dq.split('|');duSheet(i,q)}
+  if(d.rp)remPreset(d.rp);
+  if(d.re){const x=S.rems.find(y=>y.id===d.re);if(x){remEdit(x);$('#r-ft').scrollIntoView({behavior:'smooth',block:'start'})}}
+  if(d.rd){const x=S.rems.find(y=>y.id===d.rd);if(x){remFinish(x);save();render()}}
+  if(d.ro){const x=S.rems.find(y=>y.id===d.ro);if(x){x.done=false;x.snooze=0;if(remWhen(x)<=Date.now()){x.date=TODAY;x.time=new Date(Date.now()+36e5).toTimeString().slice(0,5)}save();render()}}
+  if(d.ri){const x=S.rems.find(y=>y.id===d.ri);if(x)remDl(x)}
+  if(d.dx){const[i,q]=d.dx.split('|'),x=S.dues.find(y=>y.id===i),r=x&&(x.pays||[]).find(y=>y.id===q);if(r)askConfirm('Remove this payment?','It will be taken off this entry'+(r.tx?', and the matching record in your accounts will be deleted too.':'.'),'Yes, remove',()=>{if(r.tx)S.tx=S.tx.filter(y=>y.id!==r.tx);x.pays=x.pays.filter(y=>y.id!==q);save();render()})}
   if(d.rev){rm=d.rev;go('rev')}
   if(d.m!==undefined){nm=nm===d.m?'':d.m;renderNotes()}
   if(d.n){const n=S.notes.find(x=>x.id===d.n);if(n){go('notes');noteEdit(n);window.scrollTo(0,0)}}
   if(d.bud){S.bud.month=+d.bud;$('#bm').value=S.bud.month;save();render();t.textContent='Budget saved'}
-  if(d.ci!==undefined){const ty=$('#cm-type').value;if(S.cats[ty].length>1){S.cats[ty].splice(+d.ci,1);save();renderSet();render()}}
-  if(d.ax!==undefined){const a=S.acc[+d.ax];if(S.acc.length>1&&!S.tx.some(x=>x.acc===a.id)){S.acc.splice(+d.ax,1);save();renderSet();render()}else t.textContent='!'}});
+  if(d.ci!==undefined){const ty=$('#cm-type').value,nm2=S.cats[ty][+d.ci];if(S.cats[ty].length>1)askConfirm('Remove the category "'+nm2+'"?','Your past records keep this name, but it will no longer appear in the lists.','Yes, remove',()=>{S.cats[ty].splice(S.cats[ty].indexOf(nm2),1);save();renderSet();render()});else askConfirm('Cannot remove it','You need at least one category in this list.',null)}
+  if(d.ax!==undefined){const a=S.acc[+d.ax];if(S.acc.length>1&&!S.tx.some(x=>x.acc===a.id))askConfirm('Remove the account "'+a.name+'"?','The account and its opening balance will be removed.','Yes, remove',()=>{S.acc.splice(S.acc.indexOf(a),1);save();renderSet();render()});else askConfirm('Cannot remove this account',S.acc.length<=1?'You need at least one account.':'It already has records. Delete or move those records first.',null)}
+  if(d.cf==='no')cfClose()});
 document.addEventListener('input',e=>{const d=e.target.dataset;if(!d)return;
   if(d.bi!==undefined){S.bud.cat[S.cats.exp[+d.bi]]=parseFloat(e.target.value)||0;save();render()}
   if(d.ao!==undefined){S.acc[+d.ao].open=parseFloat(e.target.value)||0;save();render()}});
 $('#cur').oninput=function(){S.cur=this.value||'Rs';save();render()};
 $('#b-show').onclick=()=>{const t=$('#b-ta');t.value=JSON.stringify(S);t.select();try{document.execCommand('copy')}catch(e){}};
-$('#b-res').onclick=()=>{try{const o=JSON.parse($('#b-ta').value);if(!Array.isArray(o.tx))throw 0;S={...D,...o};fix();save();$('#cur').value=S.cur;$('#bm').value=S.bud.month||'';render();$('#b-ta').value='Restored'}catch(e){$('#b-ta').value='Could not read that backup.'}};
+$('#b-res').onclick=()=>{let o;try{o=JSON.parse($('#b-ta').value);if(!Array.isArray(o.tx))throw 0}catch(e){$('#b-ta').value='Could not read that backup.';return}askConfirm('Restore this backup?','This replaces all the data currently in the app with the backup.','Yes, restore',()=>{S={...D,...o};fix();save();lockVault();$('#cur').value=S.cur;$('#bm').value=S.bud.month||'';render();$('#b-ta').value='Restored'})};
 $('#pin-go').onclick=async()=>{if(await hp($('#pin-in').value)===S.pin){unlocked=true;$('#pin-in').value='';$('#pin-msg').textContent='';lockCheck()}else{$('#pin-msg').textContent='Wrong PIN. Try again.';$('#pin-in').value=''}};
 $('#pin-in').addEventListener('keydown',e=>{if(e.key==='Enter')$('#pin-go').click()});
 $('#pin-set').onclick=async()=>{const v=$('#pin-new').value;if(!/^\d{4,8}$/.test(v)){$('#pin-st').textContent='Use 4 to 8 digits.';return}S.pin=await hp(v);unlocked=true;$('#pin-new').value='';save();pinUI()};
-$('#pin-off').onclick=()=>{delete S.pin;save();pinUI();lockCheck()};
+$('#pin-off').onclick=()=>askConfirm('Turn off the app lock?','Anyone who opens the app will be able to see your data without a PIN.','Yes, turn off',()=>{delete S.pin;save();pinUI();lockCheck()});
 document.addEventListener('change',e=>{if(e.target.id==='vf-sel'){const i=$('#vf-site'),o=e.target.value==='__other';i.style.display=o?'':'none';if(o)i.focus()}});
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='vu-p')$('[data-va=unlock]').click()});
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&vkey)lockVault()});
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&S.pin){unlocked=false;lockCheck()}});
-renderVault();$('#n-date').value=TODAY;$('#cur').value=S.cur;$('#bm').value=S.bud.month||'';render();pinUI();lockCheck();cloudInit();
+renderVault();$('#n-date').value=TODAY;$('#cur').value=S.cur;$('#bm').value=S.bud.month||'';render();pinUI();lockCheck();cloudInit();remEdit(null);remCheck();setInterval(remCheck,10000);
 </script>
 </body>
 </html>
