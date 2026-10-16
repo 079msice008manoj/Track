@@ -103,7 +103,11 @@ nav .t{display:grid;place-items:center;margin:5px 2px;padding:8px 0;min-height:5
 nav [data-v=home]{--c:var(--c-home)}nav [data-v=rec]{--c:var(--c-rec)}nav [data-v=inv]{--c:var(--c-inv)}nav [data-v=notes]{--c:var(--c-note)}nav [data-v=rev]{--c:var(--c-rev)}
 nav .t.on{opacity:1;color:var(--c);background:color-mix(in srgb,var(--c) 16%,transparent)}
 nav .t.on::after{content:"";position:absolute;left:28%;right:28%;top:-5px;height:3px;border-radius:3px;background:var(--c)}
-@media (max-width:350px){nav .t{font-size:10.5px}}
+nav .t{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:3px;margin:4px 2px;padding:8px 2px 6px;min-height:62px;font-size:13px;font-weight:800;letter-spacing:-.02em;line-height:1.1;text-align:center;white-space:normal;opacity:.88}
+nav .t svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex:none;transition:transform .15s}
+nav .t.on{box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--c) 38%,transparent)}nav .t.on svg{transform:translateY(-1px) scale(1.1);stroke-width:2.5}
+body{padding-bottom:116px}.fab{bottom:calc(90px + env(safe-area-inset-bottom,0px))}
+@media (max-width:350px){nav .t{font-size:12px}}
 /* income / spending / investing */
 .stat.s-inc,.card .stat.s-inc{background:color-mix(in srgb,var(--jade) 13%,var(--card));border:1px solid color-mix(in srgb,var(--jade) 38%,var(--line))}
 .stat.s-exp,.card .stat.s-exp{background:color-mix(in srgb,var(--rose) 12%,var(--card));border:1px solid color-mix(in srgb,var(--rose) 38%,var(--line))}
@@ -185,7 +189,7 @@ nav .t.on::after{content:"";position:absolute;left:28%;right:28%;top:-5px;height
 .rt{font-weight:800;font-size:16px;text-align:left;overflow-wrap:anywhere}.rtm{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}.rtm b{font-size:22px}
 .rpill{font-size:12px;font-weight:800;padding:3px 10px;border-radius:99px;background:color-mix(in srgb,var(--c-rem) 14%,var(--card));color:var(--c-rem);white-space:nowrap}
 .rpill.m{background:color-mix(in srgb,var(--rose) 14%,var(--card));color:var(--rose)}.rpill.d{background:color-mix(in srgb,var(--jade) 15%,var(--card));color:var(--jade)}
-.rbt{display:flex;gap:8px;flex-wrap:wrap}a.sb{display:inline-flex;align-items:center;text-decoration:none}
+.rbt{display:flex;gap:8px;flex-wrap:wrap}.sb.pa{margin-left:auto;color:var(--mut)}.sb.pa.on{color:var(--text);border-color:var(--c-note)}.pabox{margin-top:10px;padding:10px 12px;border-radius:12px;background:var(--bg);border:1px dashed var(--line)}a.sb{display:inline-flex;align-items:center;text-decoration:none}
 .al{position:fixed;inset:0;z-index:45;display:none;place-items:center;padding:20px;background:rgba(8,12,24,.72)}.al.on{display:grid}
 .alb{width:100%;max-width:340px;background:var(--card);border:2px solid var(--c-rem);border-radius:24px;padding:24px;text-align:center;animation:pulse 1.2s ease-in-out infinite}
 @keyframes pulse{50%{box-shadow:0 0 0 10px color-mix(in srgb,var(--c-rem) 25%,transparent)}}
@@ -269,10 +273,11 @@ nav .t.on::after{content:"";position:absolute;left:28%;right:28%;top:-5px;height
       <label>Note (optional)</label><input id="r-note" placeholder="Extra details">
       <div class="row"><div><label>Date</label><input id="r-date" type="date"></div><div><label>Time</label><input id="r-time" type="time"></div></div>
       <div class="rchips"><button class="rchip" data-rp="60">In 1 hour</button><button class="rchip" data-rp="tonight">Tonight 8 PM</button><button class="rchip" data-rp="tomorrow">Tomorrow 9 AM</button></div>
+      <div class="sub" style="margin-top:12px">Move the time</div><div class="rchips" style="margin-top:6px"><button class="rchip" data-rm="-60">-1 hour</button><button class="rchip" data-rm="-15">-15 min</button><button class="rchip" data-rm="5">+5 min</button><button class="rchip" data-rm="15">+15 min</button><button class="rchip" data-rm="60">+1 hour</button><button class="rchip" data-rm="1440">+1 day</button></div>
       <label>Repeat</label><select id="r-rep"><option value="none">Does not repeat</option><option value="daily">Every day</option><option value="weekly">Every week</option><option value="monthly">Every month</option><option value="yearly">Every year</option></select>
       <div class="vm" id="r-msg"></div>
       <button class="btn" style="margin-top:8px" id="r-add">Add reminder</button><button class="btn ghost" id="r-cancel" style="display:none">Cancel</button><button class="btn ghost del" id="r-del" style="display:none">Delete reminder</button></div>
-    <div class="card"><h2>Alarm settings</h2><div class="sub">Alarms ring with sound and vibration while this app is open. To be alerted when the app is closed, tap Google Calendar or Download .ics on a reminder to add it to your phone's calendar.</div>
+    <div class="card"><h2>Alarm settings</h2><div class="sub">At the reminder time the alarm rings with sound and vibration, and a notification shows the reminder's title and message. This works while the app is open or in the background (it can be a little late if your phone is saving battery). To be alerted when the app is closed, open Phone alarm on a reminder and add it to your phone's calendar.</div>
       <div class="rbt" style="margin-top:12px"><button class="sb" id="r-test">Test alarm</button><button class="sb" id="r-notif">Turn on notifications</button></div><div class="sub" id="r-nst" style="margin-top:8px"></div></div>
     <div id="r-list"></div>
   </div>
@@ -306,8 +311,8 @@ nav .t.on::after{content:"";position:absolute;left:28%;right:28%;top:-5px;height
 </main>
 
 <nav><div class="in">
-  <button class="t on" data-v="home">Home</button><button class="t" data-v="rec">Records</button><button class="t" data-v="inv">Invest</button>
-  <button class="t" data-v="notes">Write notes</button><button class="t" data-v="rev">Review</button>
+  <button class="t on" data-v="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Home</span></button><button class="t" data-v="rec"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><span>Records</span></button><button class="t" data-v="inv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg><span>Invest</span></button>
+  <button class="t" data-v="notes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg><span>Write notes</span></button><button class="t" data-v="rev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V10M12 21V4M19 21v-8"/></svg><span>Review</span></button>
 </div></nav>
 <button class="fab" id="fab" aria-label="Add money entry">+</button>
 
@@ -335,7 +340,9 @@ nav .t.on::after{content:"";position:absolute;left:28%;right:28%;top:-5px;height
 <div class="al" id="al" role="alertdialog" aria-modal="true" aria-labelledby="al-t"><div class="alb">
   <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
   <div class="sub" style="margin-top:6px">Reminder</div><div class="alm" id="al-tm"></div><div class="alt" id="al-t"></div><div class="sub" id="al-n" style="margin-top:6px"></div>
-  <div class="alr"><button class="btn ghost" id="al-snz">Snooze 10 min</button><button class="btn" id="al-done">Done</button></div></div></div>
+  <div class="sub" style="margin-top:16px">Snooze for</div>
+  <div class="rchips" style="justify-content:center;margin-top:8px"><button class="rchip" data-sz="5">5 min</button><button class="rchip" data-sz="10">10 min</button><button class="rchip" data-sz="30">30 min</button><button class="rchip" data-sz="60">1 hour</button></div>
+  <div class="alr"><button class="btn ghost" id="al-chg">Change time</button><button class="btn" id="al-done">Done</button></div></div></div>
 
 <div class="cf" id="cf" role="alertdialog" aria-modal="true" aria-labelledby="cf-t"><div class="bk" id="cf-bk"></div><div class="cb">
   <div class="cft" id="cf-t"></div><div class="sub" id="cf-m"></div>
@@ -598,12 +605,19 @@ const addRep=(d,rp,dom)=>{const[y,m,x]=ymd(d),dd=dom||x;if(rp==='daily')return a
 function remFinish(r){r.snooze=0;if(r.repeat&&r.repeat!=='none'){let g=0;do{r.date=addRep(r.date,r.repeat,r.dom);g++}while(remWhen(r)<=Date.now()&&g<2000)}else r.done=true}
 function audioInit(){try{if(!actx)actx=new(window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume()}catch(e){}}
 function beep(){try{if(!actx||actx.state!=='running')return;const t=actx.currentTime;[0,.25,.5].forEach(o=>{const os=actx.createOscillator(),g=actx.createGain();os.type='sine';os.frequency.value=880;g.gain.setValueAtTime(.0001,t+o);g.gain.exponentialRampToValueAtTime(.3,t+o+.02);g.gain.exponentialRampToValueAtTime(.0001,t+o+.2);os.connect(g);g.connect(actx.destination);os.start(t+o);os.stop(t+o+.22)})}catch(e){}}
+function remNotify(r){try{if(!('Notification' in window)||Notification.permission!=='granted')return;
+  const t='Reminder: '+r.title,o={body:(r.note?r.note+'\n':'')+'Time: '+tmLabel(r.time),tag:'rem-'+r.id,renotify:true,requireInteraction:true,vibrate:[300,150,300]};
+  const fb=()=>{try{new Notification(t,o)}catch(e){}};
+  if('serviceWorker' in navigator&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(g=>g&&g.showNotification?g.showNotification(t,o):fb()).catch(fb);else fb()}catch(e){}}
 function remRing(r){if(alarmId)return;alarmId=r.id;const late=Date.now()-remWhen(r);
   $('#al-t').textContent=r.title;$('#al-tm').textContent=tmLabel(r.time);$('#al-n').textContent=(r.note?r.note+'. ':'')+(late>90000?'Was due '+rdl(r.date)+', '+agoText(late):'Due now');
   $('#al').classList.add('on');$('#al-done').focus();audioInit();beep();clearInterval(alarmLoop);alarmLoop=setInterval(()=>{beep();try{navigator.vibrate&&navigator.vibrate([300,150,300])}catch(e){}},1600);
-  try{if('Notification' in window&&Notification.permission==='granted')new Notification('Reminder: '+r.title,{body:r.note||tmLabel(r.time)})}catch(e){}}
+  remNotify(r)}
 function remStop(){alarmId=null;clearInterval(alarmLoop);$('#al').classList.remove('on')}
 function remCheck(){if(alarmId)return;const n=Date.now(),r=S.rems.filter(x=>!x.done&&remWhen(x)<=n&&(!x.snooze||x.snooze<=n)).sort((a,b)=>remWhen(a)-remWhen(b))[0];if(r)remRing(r)}
+function remShift(min){const dv=$('#r-date').value,tv=$('#r-time').value;let b=dv&&tv?new Date(dv+'T'+tv+':00'):new Date();if(isNaN(b.getTime()))b=new Date();const n=new Date(b.getTime()+min*6e4);
+  $('#r-date').value=iso(n);$('#r-time').value=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')}
+function remSnooze(min){const id=alarmId;remStop();const r=S.rems.find(x=>x.id===id);if(r){r.snooze=Date.now()+min*6e4;save();render()}setTimeout(remCheck,300)}
 function remPreset(k){const n=new Date();let dt;if(k==='60')dt=new Date(n.getTime()+36e5);else if(k==='tonight'){dt=new Date(n.getFullYear(),n.getMonth(),n.getDate(),20,0);if(dt<=n)dt=new Date(dt.getTime()+864e5)}else dt=new Date(n.getFullYear(),n.getMonth(),n.getDate()+1,9,0);
   $('#r-date').value=iso(dt);$('#r-time').value=String(dt.getHours()).padStart(2,'0')+':'+String(dt.getMinutes()).padStart(2,'0')}
 function remEdit(x){remE=x?x.id:null;$('#r-msg').textContent='';$('#r-title').value=x?x.title:'';$('#r-note').value=x?x.note||'':'';$('#r-rep').value=x?x.repeat||'none':'none';if(x){$('#r-date').value=x.date;$('#r-time').value=x.time}else remPreset('60');
@@ -614,10 +628,12 @@ const remGcal=x=>{const p=n=>String(n).padStart(2,'0'),[y,m,d]=ymd(x.date),[hh,m
 function remIcs(x){const p=n=>String(n).padStart(2,'0'),[y,m,d]=ymd(x.date),[hh,mm]=x.time.split(':').map(Number),e=new Date(y,m-1,d,hh,mm+15),q=s=>String(s||'').replace(/[\\;,]/g,'\\$&').replace(/\n/g,'\\n');
   return['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//My Money//EN','BEGIN:VEVENT','UID:'+x.id+'@mymoney','DTSTAMP:'+new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z',`DTSTART:${y}${p(m)}${p(d)}T${p(hh)}${p(mm)}00`,`DTEND:${e.getFullYear()}${p(e.getMonth()+1)}${p(e.getDate())}T${p(e.getHours())}${p(e.getMinutes())}00`,'SUMMARY:'+q(x.title),x.note?'DESCRIPTION:'+q(x.note):'',RRL[x.repeat]?'RRULE:FREQ='+RRL[x.repeat]:'','BEGIN:VALARM','TRIGGER:PT0M','ACTION:DISPLAY','DESCRIPTION:'+q(x.title),'END:VALARM','END:VEVENT','END:VCALENDAR'].filter(Boolean).join('\r\n')}
 function remDl(x){try{const u=URL.createObjectURL(new Blob([remIcs(x)],{type:'text/calendar'})),a=document.createElement('a');a.href=u;a.download='reminder.ics';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),3000)}catch(e){}}
+const remPA=new Set();
 function renderRem(){const n=Date.now(),act=S.rems.filter(x=>!x.done).sort((a,b)=>remWhen(a)-remWhen(b)),late=act.filter(x=>remWhen(x)<=n),up=act.filter(x=>remWhen(x)>n),dn=S.rems.filter(x=>x.done).sort((a,b)=>remWhen(b)-remWhen(a)).slice(0,10);
   const card=(x,k)=>`<div class="rem ${k}"><div class="ph" style="margin:0"><button class="rt" data-re="${x.id}">${esc(x.title)}</button><span class="rpill ${k}">${remRel(x)}</span></div>
     <div class="rtm"><b>${tmLabel(x.time)}</b><small>${rdl(x.date)}${x.repeat&&x.repeat!=='none'?', repeats '+REPL[x.repeat]:''}</small></div>${x.note?`<small>${esc(x.note)}</small>`:''}
-    <div class="rbt">${x.done?`<button class="sb" data-ro="${x.id}">Reopen</button>`:`<button class="sb" data-rd="${x.id}">Done</button>`}<a class="sb" target="_blank" rel="noopener" href="${remGcal(x)}">Google Calendar</a><button class="sb" data-ri="${x.id}">Download .ics</button></div></div>`;
+    <div class="rbt">${x.done?`<button class="sb" data-ro="${x.id}">Reopen</button>`:`<button class="sb" data-rd="${x.id}">Done</button><button class="sb" data-rc="${x.id}">Change time</button>`}${x.done?'':`<button class="sb pa${remPA.has(x.id)?' on':''}" data-rpa="${x.id}" aria-expanded="${remPA.has(x.id)}">Phone alarm ${remPA.has(x.id)?'&#9652;':'&#9662;'}</button>`}</div>
+    ${!x.done&&remPA.has(x.id)?`<div class="pabox"><small>The in-app alarm only rings while My Money is open. To be alerted even when the app is closed, add this reminder to your phone's calendar:</small><div class="rbt" style="margin-top:8px"><a class="sb" target="_blank" rel="noopener" href="${remGcal(x)}">Google Calendar</a><button class="sb" data-ri="${x.id}">Download .ics</button></div></div>`:''}</div>`;
   $('#r-list').innerHTML=(late.length?`<div class="hd"><h2>Overdue</h2><small>${late.length}</small></div>`+late.map(x=>card(x,'m')).join(''):'')+(up.length?`<div class="hd"><h2>Upcoming</h2><small>${up.length}</small></div>`+up.map(x=>card(x,'')).join(''):(late.length?'':'<div class="card empty">No reminders yet. Add your first one above.</div>'))+(dn.length?`<div class="hd"><h2>Done</h2></div>`+dn.map(x=>card(x,'d')).join(''):'');
   $('#h-rem').innerHTML=act.length?act.slice(0,3).map(x=>`<button class="rw" data-v="notes" data-nt="rem"><span class="ei" style="color:${remWhen(x)<=n?'var(--rose)':'var(--c-rem)'}">${BELL}</span><span class="t"><b>${esc(x.title)}</b><small>${remRel(x)}</small></span><span class="amt">${tmLabel(x.time)}</span></button>`).join(''):'<div class="empty">No reminders. Open Write notes, then Reminders, to add one.</div>';
   const ns=$('#r-nst');if(ns)ns.textContent='Notifications: '+(('Notification' in window)?({granted:'on',denied:'blocked in browser settings',default:'not turned on'}[Notification.permission]||'unknown'):'not supported on this browser')}
@@ -680,12 +696,14 @@ $('#psh-save').onclick=()=>{const x=S.dues.find(y=>y.id===duPay),a=parseFloat($(
 ['click','touchstart','keydown'].forEach(ev=>document.addEventListener(ev,audioInit,{passive:true}));
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)remCheck()});
 $('#al-done').onclick=()=>{const id=alarmId;remStop();const r=S.rems.find(x=>x.id===id);if(r){remFinish(r);save();render()}setTimeout(remCheck,300)};
-$('#al-snz').onclick=()=>{const id=alarmId;remStop();const r=S.rems.find(x=>x.id===id);if(r){r.snooze=Date.now()+6e5;save();render()}setTimeout(remCheck,300)};
+$('#al-chg').onclick=()=>{const id=alarmId;remStop();const r=S.rems.find(x=>x.id===id);if(r){go('notes');notesTab('rem');remEdit(r);$('#r-ft').scrollIntoView({behavior:'smooth',block:'start'})}};
 $('#r-test').onclick=()=>{audioInit();remRing({id:'test',title:'Test alarm',note:'If you hear a beep, alarms will work while the app is open.',date:TODAY,time:new Date().toTimeString().slice(0,5),repeat:'none'})};
+$('#r-add').addEventListener('click',()=>{if(!$('#r-msg').textContent&&'Notification' in window&&Notification.permission==='default'){try{Notification.requestPermission().then(renderRem)}catch(e){}}});
+try{if('serviceWorker' in navigator&&location.protocol==='https:'&&!/claude/.test(location.host))navigator.serviceWorker.register('sw.js').catch(()=>{})}catch(e){}
 $('#r-notif').onclick=()=>{try{Notification.requestPermission().then(renderRem)}catch(e){renderRem()}};
 $('#r-cancel').onclick=()=>remEdit(null);
 $('#r-add').onclick=()=>{const t=$('#r-title').value.trim(),d=$('#r-date').value,tm=$('#r-time').value;if(!t){$('#r-msg').textContent='Write what to remind you about.';$('#r-title').focus();return}if(!d||!tm){$('#r-msg').textContent='Choose a date and a time.';return}
-  if(new Date(d+'T'+tm+':00').getTime()<=Date.now()){$('#r-msg').textContent='Choose a time in the future.';return}
+  const og=remE&&S.rems.find(y=>y.id===remE);if(!(og&&og.date===d&&og.time===tm)&&new Date(d+'T'+tm+':00').getTime()<=Date.now()){$('#r-msg').textContent='That time has already passed. Pick a later time, or use the + buttons.';return}
   const o={title:t,note:$('#r-note').value.trim(),date:d,time:tm,repeat:$('#r-rep').value,dom:+d.slice(8),done:false,snooze:0};
   if(remE){const x=S.rems.find(y=>y.id===remE);if(x)Object.assign(x,o)}else S.rems.push({id:uid(),...o,ts:Date.now()});save();remEdit(null);render()};
 $('#r-del').onclick=()=>askConfirm('Delete this reminder?','The reminder will be removed permanently.','Yes, delete',()=>{S.rems=S.rems.filter(x=>x.id!==remE);save();remEdit(null);render()});
@@ -709,6 +727,10 @@ document.addEventListener('click',e=>{const t=e.target.closest('button');if(!t)r
   if(d.dp)duSheet(d.dp);
   if(d.dq){const[i,q]=d.dq.split('|');duSheet(i,q)}
   if(d.rp)remPreset(d.rp);
+  if(d.rm)remShift(+d.rm);
+  if(d.rpa){remPA.has(d.rpa)?remPA.delete(d.rpa):remPA.add(d.rpa);render()}
+  if(d.sz&&alarmId)remSnooze(+d.sz);
+  if(d.rc){const x=S.rems.find(y=>y.id===d.rc);if(x){remEdit(x);$('#r-ft').scrollIntoView({behavior:'smooth',block:'start'});setTimeout(()=>$('#r-time').focus(),400)}}
   if(d.re){const x=S.rems.find(y=>y.id===d.re);if(x){remEdit(x);$('#r-ft').scrollIntoView({behavior:'smooth',block:'start'})}}
   if(d.rd){const x=S.rems.find(y=>y.id===d.rd);if(x){remFinish(x);save();render()}}
   if(d.ro){const x=S.rems.find(y=>y.id===d.ro);if(x){x.done=false;x.snooze=0;if(remWhen(x)<=Date.now()){x.date=TODAY;x.time=new Date(Date.now()+36e5).toTimeString().slice(0,5)}save();render()}}
